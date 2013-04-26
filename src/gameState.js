@@ -4,6 +4,7 @@ var gameState = [];
 // Board definitions
 var numSlotsPerBoard = 24;
 var numBoards = 2;
+var numPlayers = 4;
 var teamOnePieceStr = 'W';
 var teamTwoPieceStr = 'B';
 
@@ -40,6 +41,20 @@ function addStandardPiecesToBoard(boardId)
    gameState[getSlotKeyOnBoard(boardId, 23)] = teamTwoPieceStr.repeat(2);
 }
 
+// Return state key for player name
+function getPlayerNameKey(playerId)
+{
+   return 'player' + playerId + '_name';
+}
+
+// Clear player state
+function clearPlayers()
+{
+   for (var i = 0; i < numPlayers; i++) {
+      gameState[getPlayerNameKey(i)] = 'Player ' + (i + 1);
+   }
+}
+
 // Initialize the game state to default values
 function initGameState()
 {
@@ -47,13 +62,20 @@ function initGameState()
       clearBoard(board);
       addStandardPiecesToBoard(board);
    }
+
+   clearPlayers();
 }
 
 // Test code
 initGameState();
+
 for (var i = 0; i < numBoards; i++) {
    for (var j = 0; j < numSlotsPerBoard; j++) {
       print(getSlotKeyOnBoard(i, j) + ' = "' +
             gameState[getSlotKeyOnBoard(i, j)] + '"');
    }
+}
+
+for (var i = 0; i < numPlayers; i++) {
+   print(getPlayerNameKey(i) + ' = "' + gameState[getPlayerNameKey(i)] + '"');
 }
