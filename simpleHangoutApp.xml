@@ -40,7 +40,7 @@
 
 <script src="https://hangoutsapi.talkgadget.google.com/hangouts/api/hangout.js?v=1.4" ></script>
 
-<h3>Hanggammon</h3>
+<h3>HangGammon</h3>
 
 <p>
 <input class="button" type="button" value="Show participants!" id="showParticipants" 
