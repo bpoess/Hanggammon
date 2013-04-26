@@ -1,4 +1,0 @@
-Hanggammon
-==========
-
-Hangout Multiplayer Backgammon
