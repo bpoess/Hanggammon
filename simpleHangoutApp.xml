@@ -42,7 +42,12 @@
 
 <h3>HangGammon served on collabedit hello world</h3>
 
+<div id=scoreboard><center>0 : 0</center></div>
+<div id=scoreboard_buttons><input class="button" type="button" value="-"
+     id="leftScoreMinus" style="visibility:hidden;"
+
 <p>
+
 <input class="button" type="button" value="Show participants!" id="showParticipants"
     style="visibility:hidden;"
     onClick="showParticipants()"/>
@@ -68,11 +73,17 @@
 
 <div id="stateDiv"></div>
 
+<canvas id="myCanvas" width="200" height="100"></canvas>
+
 <hr>
 
-<p><a href="http://developers.google.com/+/hangouts/getting-started">Read the docs</a> to learn more about developing hangouts!</a></p>
+<div id="owner">Nobody</div>
 
-currentPlayer = "Nobody"
+<p>
+    <input class="button" type="button" value="Change owner" id="ownerButton"
+    style="visibility:hidden;"
+    onClick="updateOwner()"/>
+</p>
 
 <script>
 function showParticipants() {
@@ -101,19 +112,23 @@ function getLocalDisplayName() {
 }
 
 function oneButton() {
-  gapi.hangout.data.setValue("state",getLocalDisplayName() + " changed state to: One");
+  gapi.hangout.data.setValue('state',getLocalDisplayName() + ' changed state to: One');
 }
 
 function twoButton() {
-  gapi.hangout.data.setValue("state",getLocalDisplayName() + " changed state to: Two");
+  gapi.hangout.data.setValue('state',getLocalDisplayName() + ' changed state to: Two');
 }
 
 function threeButton() {
-  gapi.hangout.data.setValue("state",getLocalDisplayName() + " changed state to: Three");
+  gapi.hangout.data.setValue('state',getLocalDisplayName() + ' changed state to: Three');
 }
 
 function fourButton() {
-  gapi.hangout.data.setValue("state",getLocalDisplayName() + " changed state to: Four");
+  gapi.hangout.data.setValue('state',getLocalDisplayName() + ' changed state to: Four');
+}
+
+function updateOwner() {
+  gapi.hangout.data.setValue('owner', getLocalDisplayName());
 }
 
 function showStateButton() {
@@ -121,11 +136,24 @@ function showStateButton() {
   stateDiv.innerHTML = gapi.hangout.data.getValue("state");
 }
 
-function onStateChange() {
-  var stateDiv = document.getElementById('stateDiv');
-  stateDiv.innerHTML = gapi.hangout.data.getValue("state");
+function updateOwnerState() {
+  document.getElementById('owner').innerHTML = gapi.hangout.data.getValue('owner');
 }
 
+function onStateChange() {
+  var stateDiv = document.getElementById('stateDiv');
+  stateDiv.innerHTML = gapi.hangout.data.getValue('state');
+  updateOwnerState();
+}
+
+function initOwner() {
+  currentOwner = gapi.hangout.data.getValue('owner');
+  if (currentOwner == 'undefined') {
+    currentOwner = getLocalDisplayName();
+    gapi.hangout.data.setValue('owner', currentOwner);
+  }
+  updateOwnerState();
+}
 
 function init() {
   // When API is ready...
@@ -142,11 +170,34 @@ function init() {
             .style.visibility = 'visible';
           document.getElementById('fourButton')
             .style.visibility = 'visible';
+          document.getElementById('ownerButton')
+            .style.visibility = 'visible';
 
           gapi.hangout.data.onStateChanged.add(onStateChange);
           // onStateChange doesn't get called until a button gets pressed
           // so We have to call it here once to get into an initialized state
+          initOwner();
           onStateChange();
+
+          var c=document.getElementById('myCanvas');
+          var ctx=c.getContext('2d');
+          ctx.fillStyle="#FF0000";
+          ctx.fillRect(0,0,150,75);
+          ctx.moveTo(0,0);
+          ctx.lineTo(200,100);
+          ctx.stroke();
+                var centerX = c.width / 2;
+      var centerY = c.height / 2;
+      var radius = 20;
+
+      ctx.beginPath();
+      ctx.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+      ctx.fillStyle = 'green';
+      ctx.fill();
+      ctx.lineWidth = 5;
+      ctx.strokeStyle = '#003300';
+      ctx.stroke();
+
         }
       });
 }
