@@ -5,6 +5,8 @@ var gameState = [];
 var numSlotsPerBoard = 24;
 var numBoards = 2;
 var numPlayers = 4;
+var numDice = 2;
+var numTeams = 2;
 var teamOnePieceStr = 'W';
 var teamTwoPieceStr = 'B';
 
@@ -55,6 +57,32 @@ function clearPlayers()
    }
 }
 
+// Return state key for dice value
+function getDiceValueKey(diceId)
+{
+   return 'dice' + diceId + '_value';
+}
+
+// Initialize dice state
+function initDiceState()
+{
+   gameState[getDiceValueKey(0)] = '6';
+   gameState[getDiceValueKey(1)] = '6';
+}
+
+// Return state key for team score
+function getTeamScoreKey(teamId)
+{
+   return 'team' + teamId + '_score';
+}
+
+// Initialize team scores
+function initTeamScores()
+{
+   gameState[getTeamScoreKey(0)] = '0';
+   gameState[getTeamScoreKey(1)] = '0';
+}
+
 // Initialize the game state to default values
 function initGameState()
 {
@@ -64,6 +92,10 @@ function initGameState()
    }
 
    clearPlayers();
+
+   initDiceState();
+
+   initTeamScores();
 }
 
 // Test code
@@ -78,4 +110,12 @@ for (var i = 0; i < numBoards; i++) {
 
 for (var i = 0; i < numPlayers; i++) {
    print(getPlayerNameKey(i) + ' = "' + gameState[getPlayerNameKey(i)] + '"');
+}
+
+for (var i = 0; i < numDice; i++) {
+   print(getDiceValueKey(i) + ' = "' + gameState[getDiceValueKey(i)] + '"');
+}
+
+for (var i = 0; i < numDice; i++) {
+   print(getTeamScoreKey(i) + ' = "' + gameState[getTeamScoreKey(i)] + '"');
 }
