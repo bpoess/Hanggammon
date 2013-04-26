@@ -16,11 +16,28 @@ function getSlotKeyOnBoard(boardId, slotId)
    return 'board' + boardId + '_slot' + slotId;
 }
 
+// Return the key for the collected pieces of a given team on the given board
+function getTeamCollectedKeyOnBoard(boardId, teamId)
+{
+   return 'board' + boardId + '_team' + teamId + '_collected';
+}
+
+// Return the key for the currently "hit" pieces of a team on the given board
+function getTeamHitKeyOnBoard(boardId, teamId)
+{
+   return 'board' + boardId + '_team' + teamId + '_hit';
+}
+
 // Initialize the given board to be empty
 function clearBoard(boardId)
 {
    for (var slot = 0; slot < numSlotsPerBoard; slot++) {
       gameState[getSlotKeyOnBoard(boardId, slot)] = '';
+   }
+
+   for (var team = 0; team < numTeams; team++) {
+      gameState[getTeamCollectedKeyOnBoard(boardId, team)] = '';
+      gameState[getTeamHitKeyOnBoard(boardId, team)] = '';
    }
 }
 
@@ -105,6 +122,13 @@ for (var i = 0; i < numBoards; i++) {
    for (var j = 0; j < numSlotsPerBoard; j++) {
       print(getSlotKeyOnBoard(i, j) + ' = "' +
             gameState[getSlotKeyOnBoard(i, j)] + '"');
+   }
+
+   for (var j = 0; j < numTeams; j++) {
+      print(getTeamCollectedKeyOnBoard(i,j) + ' = "' +
+               gameState[getTeamCollectedKeyOnBoard(i,j)] + '"');
+      print(getTeamHitKeyOnBoard(i,j) + ' = "' +
+               gameState[getTeamHitKeyOnBoard(i,j)] + '"');
    }
 }
 
