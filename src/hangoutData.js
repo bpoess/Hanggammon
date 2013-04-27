@@ -1,42 +1,42 @@
-// Keys queued for updating
-var queuedKeysToUpdate = [];
+// Queued updates pending to be committed
+var queuedUpdates = [];
 
-function queueStateUpdate(key)
+function queueStateUpdate(newKey, newValue)
 {
    // If key is already queued just bail out
-   for (var i in queuedKeysToUpdate) {
-      if (queuedKeysToUpdate[i].match(key)) {
+   for (var i in queuedUpdates) {
+      if (queuedUpdates[i].key.match(newKey)) {
          return;
       }
    }
 
-   queuedKeysToUpdate.push(key);
+   queuedUpdates.push({key: newKey, value: newValue});
 }
 
 // Commit queued updates to the server
 function commitQueuedStateUpdates()
 {
-   if (queuedKeysToUpdate.length == 0) {
+   if (queuedUpdates.length == 0) {
       return;
    }
 
    // Use setValue() if there's a single update
-   if (queuedKeysToUpdate.length == 1) {
-      gapi.hangout.data.setValue(queuedKeysToUpdate[i],
-                                 gameState[queuedKeysToUpdate[i]]);
+   if (queuedUpdates.length == 1) {
+      gapi.hangout.data.setValue(queuedUpdates[0].key,
+                                 queuedUpdates[0].value);
    } else {
       var updateObj = {};
 
-      // Push key/value pairs for each queued key
-      for (var i in queuedKeysToUpdate) {
-         updateObj[queuedKeysToUpdate[i]] = gameState[queuedKeysToUpdate[i]];
+      // Push key/value pairs for each queued update
+      for (var update in queuedUpdates) {
+         updateObj[update.key] = update.value;
       }
 
       gapi.hangout.data.submitDelta(updateObj, []);
    }
 
-   // Clear queued keys
-   queuedKeysToUpdate = [];
+   // Clear queued updates
+   queuedUpdates = [];
 }
 
 // Push all game state to the server
@@ -46,12 +46,9 @@ function pushAllGameState()
 }
 
 // Test code
-//var gameState = [];
-//gameState['abc'] = 'some state';
-//gameState['dfg'] = 'more state';
-//queueStateUpdate('abc');
-//queueStateUpdate('dfg');
-//queueStateUpdate('abc');
-//print(queuedKeysToUpdate);
+//queueStateUpdate('abc', 'some state');
+//queueStateUpdate('dfg', 'some state');
+//queueStateUpdate('abc', 'different state');
+//print(queuedUpdates);
 //commitQueuedStateUpdates();
 //pushAllGameState();
