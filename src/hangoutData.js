@@ -4,8 +4,8 @@ var queuedUpdates = [];
 function queueStateUpdate(newKey, newValue)
 {
    // If key is already queued just bail out
-   for (var i in queuedUpdates) {
-      if (queuedUpdates[i].key.match(newKey)) {
+   for (var update in queuedUpdates) {
+      if (update.key.match(newKey)) {
          return;
       }
    }
