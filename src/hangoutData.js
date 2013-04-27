@@ -30,7 +30,15 @@ function commitQueuedStateUpdates()
             updateArray[i].value);
    }
    //XXX: end of debug stuff ----------------------------------
-   // gapi.hangout.data.submitDelta(updateArray, []);
+
+   /*
+    * if (updateArray.length > 1) {
+    *    gapi.hangout.data.submitDelta(updateArray, []);
+    * } else {
+    *    Use setValue() if there's a single update
+    *    gapi.hangout.data.setValue(updateArray[0].key, updateArray[0].value);
+    * }
+    */
 
    // Clear queued keys
    queuedKeysToUpdate = [];
