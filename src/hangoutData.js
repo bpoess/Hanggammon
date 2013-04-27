@@ -46,8 +46,15 @@ function pushAllGameState()
 }
 
 // Sync state update coming from the server
-function onStateChanged(stateChangedEvent)
+function onStateChanged(changeEvent)
 {
+   /*
+    * For now, lets just overwrite gameState with the received state. Its
+    * possible to do better than this by checking timestamps if necessary.
+    */
+   gameState = changeEvent.state;
+
+   //XXX: Call method to update display state
 }
 
 // Test code
