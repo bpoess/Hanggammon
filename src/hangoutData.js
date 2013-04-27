@@ -42,14 +42,12 @@ function commitQueuedStateUpdates()
 // Push all game state to the server
 function pushAllGameState()
 {
-   var updateObj = [];
+   gapi.hangout.data.submitDelta(gameState, []);
+}
 
-   // Push key/value pairs for all gameState elements
-   for (var stateKey in gameState) {
-      updateObj[stateKey] = gameState[stateKey];
-   }
-
-   gapi.hangout.data.submitDelta(updateObj, []);
+// Sync state update coming from the server
+function onStateChanged(stateChangedEvent)
+{
 }
 
 // Test code
