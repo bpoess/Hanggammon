@@ -24,21 +24,12 @@ function commitQueuedStateUpdates()
                         value:gameState[queuedKeysToUpdate[i]]});
    }
 
-   //XXX: debug stuff -----------------------------------------
-   for (var i = 0; i < updateArray.length; i++) {
-      print('Update key: ' + updateArray[i].key + ' value: ' +
-            updateArray[i].value);
+   if (updateArray.length > 1) {
+      gapi.hangout.data.submitDelta(updateArray, []);
+   } else {
+      // Use setValue() if there's a single update
+      gapi.hangout.data.setValue(updateArray[0].key, updateArray[0].value);
    }
-   //XXX: end of debug stuff ----------------------------------
-
-   /*
-    * if (updateArray.length > 1) {
-    *    gapi.hangout.data.submitDelta(updateArray, []);
-    * } else {
-    *    Use setValue() if there's a single update
-    *    gapi.hangout.data.setValue(updateArray[0].key, updateArray[0].value);
-    * }
-    */
 
    // Clear queued keys
    queuedKeysToUpdate = [];
@@ -55,22 +46,16 @@ function pushAllGameState()
                         value:gameState[stateKey]});
    }
 
-   //XXX: debug stuff -----------------------------------------
-   for (var i = 0; i < updateArray.length; i++) {
-      print('Update key: ' + updateArray[i].key + ' value: ' +
-            updateArray[i].value);
-   }
-   //XXX: end of debug stuff ----------------------------------
-   // gapi.hangout.data.submitDelta(updateArray, []);
+   gapi.hangout.data.submitDelta(updateArray, []);
 }
 
 // Test code
-var gameState = [];
-gameState['abc'] = 'some state';
-gameState['dfg'] = 'more state';
-queueStateUpdate('abc');
-queueStateUpdate('dfg');
-queueStateUpdate('abc');
-print(queuedKeysToUpdate);
-commitQueuedStateUpdates();
-pushAllGameState();
+//var gameState = [];
+//gameState['abc'] = 'some state';
+//gameState['dfg'] = 'more state';
+//queueStateUpdate('abc');
+//queueStateUpdate('dfg');
+//queueStateUpdate('abc');
+//print(queuedKeysToUpdate);
+//commitQueuedStateUpdates();
+//pushAllGameState();

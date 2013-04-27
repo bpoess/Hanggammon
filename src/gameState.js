@@ -146,5 +146,5 @@ function printGameState()
 }
 
 // Test code
-initGameState();
-printGameState();
+//initGameState();
+//printGameState();
