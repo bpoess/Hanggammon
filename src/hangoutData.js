@@ -16,19 +16,23 @@ function queueStateUpdate(key)
 // Commit queued updates to the server
 function commitQueuedStateUpdates()
 {
-   var updateArray = [];
-
-   // Push key/value pairs for each queued key
-   for (var i in queuedKeysToUpdate) {
-      updateArray.push({key:queuedKeysToUpdate[i],
-                        value:gameState[queuedKeysToUpdate[i]]});
+   if (queuedKeysToUpdate.length == 0) {
+      return;
    }
 
-   if (updateArray.length > 1) {
-      gapi.hangout.data.submitDelta(updateArray, []);
+   // Use setValue() if there's a single update
+   if (queuedKeysToUpdate.length == 1) {
+      gapi.hangout.data.setValue({queuedKeysToUpdate[i],
+                                  gameState[queuedKeysToUpdate[i]]});
    } else {
-      // Use setValue() if there's a single update
-      gapi.hangout.data.setValue(updateArray[0].key, updateArray[0].value);
+      var updateObj = {};
+
+      // Push key/value pairs for each queued key
+      for (var i in queuedKeysToUpdate) {
+         updateObj[queuedKeysToUpdate[i]] = gameState[queuedKeysToUpdate[i]];
+      }
+
+      gapi.hangout.data.submitDelta(updateObj, []);
    }
 
    // Clear queued keys
@@ -38,15 +42,14 @@ function commitQueuedStateUpdates()
 // Push all game state to the server
 function pushAllGameState()
 {
-   var updateArray = [];
+   var updateObj = [];
 
    // Push key/value pairs for all gameState elements
    for (var stateKey in gameState) {
-      updateArray.push({key:stateKey,
-                        value:gameState[stateKey]});
+      updateObj[stateKey] = gameState[stateKey];
    }
 
-   gapi.hangout.data.submitDelta(updateArray, []);
+   gapi.hangout.data.submitDelta(updateObj, []);
 }
 
 // Test code
