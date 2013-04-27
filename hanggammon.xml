@@ -50,7 +50,7 @@
 
 function onStateChange() {
   var stateDiv = document.getElementById('stateDiv');
-  stateDiv.innerHTML = printGameState();
+  stateDiv.innerHTML = gameStateToString();
 }
 
 function init() {
