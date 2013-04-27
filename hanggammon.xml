@@ -48,25 +48,37 @@
 
 <script>
 
-function onStateChange() {
-  var stateDiv = document.getElementById('stateDiv');
-  stateDiv.innerHTML = gameStateToString();
+function updateDisplayState()
+{
+   var stateDiv = document.getElementById('stateDiv');
+   stateDiv.innerHTML = gameStateToString();
+}
+
+// Sync state update coming from the server
+function onStateChange(changeEvent)
+{
+   /*
+    * For now, lets just overwrite gameState with the received state. Its
+    * possible to do better than this by checking timestamps if necessary.
+    */
+   gameState = changeEvent.state;
+
+   // Call method to update display state
+   updateDisplayState();
 }
 
 function init() {
-  // When API is ready...
-  gapi.hangout.onApiReady.add(
+   // When API is ready...
+   gapi.hangout.onApiReady.add(
       function(eventObj) {
-        if (eventObj.isApiReady) {
+         if (eventObj.isApiReady) {
+            gapi.hangout.data.onStateChanged.add(onStateChange);
 
-          gapi.hangout.data.onStateChanged.add(onStateChange);
-          // onStateChange doesn't get called until a button gets pressed
-          // so We have to call it here once to get into an initialized state
-          initGameState();
-          onStateChange();
-
-        }
-      });
+            initGameState();
+            updateDisplayState();
+         }
+      }
+   );
 }
 
 // Wait for gadget to load.
