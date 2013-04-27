@@ -22,8 +22,8 @@ function commitQueuedStateUpdates()
 
    // Use setValue() if there's a single update
    if (queuedKeysToUpdate.length == 1) {
-      gapi.hangout.data.setValue({queuedKeysToUpdate[i],
-                                  gameState[queuedKeysToUpdate[i]]});
+      gapi.hangout.data.setValue(queuedKeysToUpdate[i],
+                                 gameState[queuedKeysToUpdate[i]]);
    } else {
       var updateObj = {};
 
