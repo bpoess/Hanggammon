@@ -115,31 +115,36 @@ function initGameState()
    initTeamScores();
 }
 
+// Print the game state
+function printGameState()
+{
+   for (var i = 0; i < numBoards; i++) {
+      for (var j = 0; j < numSlotsPerBoard; j++) {
+         print(getSlotKeyOnBoard(i, j) + ' = "' +
+               gameState[getSlotKeyOnBoard(i, j)] + '"');
+      }
+
+      for (var j = 0; j < numTeams; j++) {
+         print(getTeamCollectedKeyOnBoard(i,j) + ' = "' +
+                  gameState[getTeamCollectedKeyOnBoard(i,j)] + '"');
+         print(getTeamHitKeyOnBoard(i,j) + ' = "' +
+                  gameState[getTeamHitKeyOnBoard(i,j)] + '"');
+      }
+   }
+
+   for (var i = 0; i < numPlayers; i++) {
+      print(getPlayerNameKey(i) + ' = "' + gameState[getPlayerNameKey(i)] + '"');
+   }
+
+   for (var i = 0; i < numDice; i++) {
+      print(getDiceValueKey(i) + ' = "' + gameState[getDiceValueKey(i)] + '"');
+   }
+
+   for (var i = 0; i < numDice; i++) {
+      print(getTeamScoreKey(i) + ' = "' + gameState[getTeamScoreKey(i)] + '"');
+   }
+}
+
 // Test code
 initGameState();
-
-for (var i = 0; i < numBoards; i++) {
-   for (var j = 0; j < numSlotsPerBoard; j++) {
-      print(getSlotKeyOnBoard(i, j) + ' = "' +
-            gameState[getSlotKeyOnBoard(i, j)] + '"');
-   }
-
-   for (var j = 0; j < numTeams; j++) {
-      print(getTeamCollectedKeyOnBoard(i,j) + ' = "' +
-               gameState[getTeamCollectedKeyOnBoard(i,j)] + '"');
-      print(getTeamHitKeyOnBoard(i,j) + ' = "' +
-               gameState[getTeamHitKeyOnBoard(i,j)] + '"');
-   }
-}
-
-for (var i = 0; i < numPlayers; i++) {
-   print(getPlayerNameKey(i) + ' = "' + gameState[getPlayerNameKey(i)] + '"');
-}
-
-for (var i = 0; i < numDice; i++) {
-   print(getDiceValueKey(i) + ' = "' + gameState[getDiceValueKey(i)] + '"');
-}
-
-for (var i = 0; i < numDice; i++) {
-   print(getTeamScoreKey(i) + ' = "' + gameState[getTeamScoreKey(i)] + '"');
-}
+printGameState();
