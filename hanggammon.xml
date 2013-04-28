@@ -46,6 +46,10 @@
 <h3>HangGammon</h3>
 
 <p>
+   From board: <input type="text" name="moveBoardText" value="0"><br>
+   Team:       <input type="text" name="moveTeamText" value="0"><br>
+   From slot:  <input type="text" name="moveFromSlotText" value="0"><br>
+   To slot:    <input type="text" name="moveToSlotText" value="3"><br>
    <input class="button" type="button" value="Move piece!" id="movePieceButton"
     onClick="movePieceTest()"/>
 </p>
@@ -56,8 +60,10 @@
 
 function movePieceTest()
 {
-   // board 0 team 0 move piece from slot 0 to slot 3
-   movePiece(0,0,0,3);
+   movePiece(document.moveBoardText.value,
+             document.moveTeamText.value,
+             document.moveFromSlotText.value,
+             document.moveToSlotText.value);
 }
 
 function updateDisplayState()
