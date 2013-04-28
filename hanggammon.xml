@@ -70,8 +70,7 @@ function updateDisplayState()
 function onStateChange(changeEvent)
 {
    // sync the changes to gameState
-   for (var i in changeEvent.addedKeys) {
-      var updatedKey = changeEvent.addedKeys[i];
+   for (var updatedKey in changeEvent.state) {
       gameState[updatedKey] = changeEvent.state[updatedKey];
    }
 
