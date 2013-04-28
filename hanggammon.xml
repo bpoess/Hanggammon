@@ -41,6 +41,7 @@
 <script src="https://hangoutsapi.talkgadget.google.com/hangouts/api/hangout.js?v=1.4" ></script>
 <script src="http://bpoess.github.io/Hanggammon/src/gameState.js"></script>
 <script src="http://bpoess.github.io/Hanggammon/src/hangoutData.js"></script>
+<script src="http://bpoess.github.io/Hanggammon/src/movement.js"></script>
 
 <h3>HangGammon</h3>
 

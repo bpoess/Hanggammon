@@ -6,9 +6,12 @@ var numSlotsPerBoard = 24;
 var numBoards = 2;
 var numPlayers = 4;
 var numDice = 2;
-var numTeams = 2;
-var teamOnePieceStr = 'W';
-var teamTwoPieceStr = 'B';
+
+// Team definitions
+var team = [];
+team[0] = {pieceChar : 'W'};
+team[1] = {pieceChar : 'B'};
+var numTeams = team.length;
 
 // Return the state key for a given slot in the given board
 function getSlotKeyOnBoard(boardId, slotId)
@@ -50,14 +53,14 @@ String.prototype.repeat = function(num)
 // Add standard piece configuration to a board
 function addStandardPiecesToBoard(boardId)
 {
-   gameState[getSlotKeyOnBoard(boardId, 0)] = teamOnePieceStr.repeat(2);
-   gameState[getSlotKeyOnBoard(boardId, 5)] = teamTwoPieceStr.repeat(5);
-   gameState[getSlotKeyOnBoard(boardId, 7)] = teamTwoPieceStr.repeat(3);
-   gameState[getSlotKeyOnBoard(boardId, 11)] = teamOnePieceStr.repeat(5);
-   gameState[getSlotKeyOnBoard(boardId, 12)] = teamTwoPieceStr.repeat(5);
-   gameState[getSlotKeyOnBoard(boardId, 16)] = teamOnePieceStr.repeat(3);
-   gameState[getSlotKeyOnBoard(boardId, 18)] = teamOnePieceStr.repeat(5);
-   gameState[getSlotKeyOnBoard(boardId, 23)] = teamTwoPieceStr.repeat(2);
+   gameState[getSlotKeyOnBoard(boardId, 0)] = team[0].pieceChar.repeat(2);
+   gameState[getSlotKeyOnBoard(boardId, 5)] = team[1].pieceChar.repeat(5);
+   gameState[getSlotKeyOnBoard(boardId, 7)] = team[1].pieceChar.repeat(3);
+   gameState[getSlotKeyOnBoard(boardId, 11)] = team[0].pieceChar.repeat(5);
+   gameState[getSlotKeyOnBoard(boardId, 12)] = team[1].pieceChar.repeat(5);
+   gameState[getSlotKeyOnBoard(boardId, 16)] = team[0].pieceChar.repeat(3);
+   gameState[getSlotKeyOnBoard(boardId, 18)] = team[0].pieceChar.repeat(5);
+   gameState[getSlotKeyOnBoard(boardId, 23)] = team[1].pieceChar.repeat(2);
 }
 
 // Return state key for player name

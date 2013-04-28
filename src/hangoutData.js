@@ -1,16 +1,16 @@
 // Queued updates pending to be committed
 var queuedUpdates = [];
 
-function queueStateUpdate(newKey, newValue)
+function queueStateUpdate(keyToUpdate, newValue)
 {
    // If key is already queued just bail out
    for (var update in queuedUpdates) {
-      if (update.key.match(newKey)) {
+      if (update.key.match(keyToUpdate)) {
          return;
       }
    }
 
-   queuedUpdates.push({key: newKey, value: newValue});
+   queuedUpdates.push({key: keyToUpdate, value: newValue});
 }
 
 // Commit queued updates to the server
