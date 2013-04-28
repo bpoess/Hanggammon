@@ -4,8 +4,8 @@ var queuedUpdates = [];
 function queueStateUpdate(keyToUpdate, newValue)
 {
    // If key is already queued just bail out
-   for (var update in queuedUpdates) {
-      if (update.key == keyToUpdate) {
+   for (var i in queuedUpdates) {
+      if (queuedUpdates[i].key == keyToUpdate) {
          return;
       }
    }
@@ -28,8 +28,8 @@ function commitQueuedStateUpdates()
       var updateObj = {};
 
       // Push key/value pairs for each queued update
-      for (var update in queuedUpdates) {
-         updateObj[update.key] = update.value;
+      for (var i in queuedUpdates) {
+         updateObj[queuedUpdates[i].key] = queuedUpdates[i].value;
       }
 
       gapi.hangout.data.submitDelta(updateObj, []);
