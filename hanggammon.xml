@@ -47,8 +47,8 @@
 
 <p>
    <form name="moveForm">
-      From board: <input type="text" name="moveBoardText" value="0"><br>
       Team:       <input type="text" name="moveTeamText" value="0"><br>
+      From board: <input type="text" name="moveBoardText" value="0"><br>
       From slot:  <input type="text" name="moveFromSlotText" value="0"><br>
       To slot:    <input type="text" name="moveToSlotText" value="3"><br>
       <input class="button" type="button" value="Move piece!" id="movePieceButton"
