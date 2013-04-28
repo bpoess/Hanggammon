@@ -45,9 +45,20 @@
 
 <h3>HangGammon</h3>
 
+<p>
+   <input class="button" type="button" value="Move piece!" id="movePieceButton"
+    onClick="movePieceTest()"/>
+</p>
+
 <div id="stateDiv"></div>
 
 <script>
+
+function movePieceTest()
+{
+   // board 0 team 0 move piece from slot 0 to slot 3
+   movePiece(0,0,0,3);
+}
 
 function updateDisplayState()
 {
