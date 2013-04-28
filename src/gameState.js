@@ -9,8 +9,8 @@ var numDice = 2;
 
 // Team definitions
 var team = [];
-team[0] = {pieceChar : 'W'};
-team[1] = {pieceChar : 'B'};
+team[0] = {pieceChar : '0'};
+team[1] = {pieceChar : '1'};
 var numTeams = team.length;
 
 // Return the state key for a given slot in the given board
