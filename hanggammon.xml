@@ -69,11 +69,11 @@ function updateDisplayState()
 // Sync state update coming from the server
 function onStateChange(changeEvent)
 {
-   /*
-    * For now, lets just overwrite gameState with the received state. Its
-    * possible to do better than this by checking timestamps if necessary.
-    */
-   gameState = changeEvent.state;
+   // sync the changes to gameState
+   for (var i in changeEvent.addedKeys) {
+      var updatedKey = changeEvent.addedKeys[i];
+      gameState[updatedKey] = changeEvent.state[updatedKey];
+   }
 
    // Call method to update display state
    updateDisplayState();
