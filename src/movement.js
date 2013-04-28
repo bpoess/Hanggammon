@@ -13,15 +13,23 @@ function movePiece(boardId, teamId, fromSlot, toSlot)
    // Create new value of fromSlot
    var oldFromSlotValue = gameState[fromSlotKey];
    var oldFromSlotLen = oldFromSlotValue.length;
-   var newFromSlotValue;
-   if (pieceIndex < oldFromSlotLen - 2) {
-      // Make a hole at pieceIndex
-      newFromSlotValue = oldFromSlotValue.substring(0, pieceIndex) +
-                         oldFromSlotValue.substring(pieceIndex + 1,
-                                                    oldFromSlotLen - 1);
-   } else {
-      // Clip until pieceIndex
-      newFromSlotValue = oldFromSlotValue.substring(0, pieceIndex);
+   var newFromSlotValue = '';
+
+   /*
+    * First part of the result is from 0 until pieceIndex. Skip this if
+    * we're removing the first piece.
+    */
+   if (pieceIndex != 0) {
+      newFromSlotValue += oldFromSlotValue.substring(0, pieceIndex);
+   }
+
+   /*
+    * Second part of the result is from pieceIndex + 1 until oldFromSlotLen.
+    * Skip this if we're removing the last piece.
+    */
+   if (pieceIndex != oldFromSlotLen - 1) {
+      newFromSlotValue += oldFromSlotValue.substring(pieceIndex + 1,
+                                                     oldFromSlotLen);
    }
 
    // Queue update to remove a piece from fromSlot
