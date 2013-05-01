@@ -57,7 +57,6 @@
    </form>
 </p>
 
-<-- Hidden divs for variables -->
 <div id="stateDiv"></div>
 <div id="started"></div>
 
