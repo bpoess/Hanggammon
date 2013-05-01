@@ -99,7 +99,7 @@ function gameStateToDisplay()
               context.closePath();
             } else {
               context.beginPath();
-                context.arc(piece * (j + .5) + middleOffset + j, boardHeight - piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
+                context.arc(piece * (12 - j + .5) + middleOffset + 12 - j, boardHeight - piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
                 context.fill();
                 context.stroke();
               context.closePath();
