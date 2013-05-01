@@ -80,37 +80,19 @@ function gameStateToDisplay()
       // middle
       context.fillStyle = '#000000';
       context.fillRect(boardWidth / 2 - boardMiddle / 2 + boardMiddleMargin / 2, 0, boardMiddle - boardMiddleMargin, boardHeight);
+
+      context.fillStyle = '#ff0000';
+      for (var j = 0; j < numSlotsPerBoard; j++) {
+        slotState = gameState[getSlotKeyOnBoard(i, j)];
+        var middleOffset = Math.floor(j / 6) * boardMiddle;
+        for (var k = 0; k < slotState.length; k++) {
+          context.beginPath();
+            context.arc(piece * (j + .5) + middleOffset, piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
+            context.fill();
+            context.stroke();
+          context.closePath();
+        } 
+      }
     }
-  }
-
-  var returnStr = '';
-
-  for (var i = 0; i < numBoards; i++) {
-     for (var j = 0; j < numSlotsPerBoard; j++) {
-        returnStr += getSlotKeyOnBoard(i, j) + ' = "' +
-                     gameState[getSlotKeyOnBoard(i, j)] + '"\n';
-     }
-
-     for (var j = 0; j < numTeams; j++) {
-        returnStr += getTeamCollectedKeyOnBoard(i,j) + ' = "' +
-                     gameState[getTeamCollectedKeyOnBoard(i,j)] + '"\n';
-        returnStr += getTeamHitKeyOnBoard(i,j) + ' = "' +
-                     gameState[getTeamHitKeyOnBoard(i,j)] + '"\n';
-     }
-  }
-
-  for (var i = 0; i < numPlayers; i++) {
-     returnStr += getPlayerNameKey(i) + ' = "' +
-                  gameState[getPlayerNameKey(i)] + '"\n';
-  }
-
-  for (var i = 0; i < numDice; i++) {
-     returnStr += getDiceValueKey(i) + ' = "' +
-                  gameState[getDiceValueKey(i)] + '"\n';
-  }
-
-  for (var i = 0; i < numDice; i++) {
-     returnStr += getTeamScoreKey(i) + ' = "' +
-                  gameState[getTeamScoreKey(i)] + '"\n';
   }
 }
