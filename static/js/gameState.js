@@ -107,7 +107,7 @@ function initTeamScores()
 function initGameState()
 {
    started = getStarted();
-   if (started == 1) {
+   if (started == 0) {
       setStarted();
       for (var board = 0; board < numBoards; board++) {
          clearBoard(board);
