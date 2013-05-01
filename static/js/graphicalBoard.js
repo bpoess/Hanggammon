@@ -99,9 +99,10 @@ function gameStateToDisplay()
                 context.stroke();
               context.closePath();
             } else {
-              var middleOffset = Math.floor((j - 12) / 6) * boardMiddle;
+              var remapped = Math.abs(j - 23)
+              var middleOffset = Math.floor(remapped / 6) * boardMiddle;
               context.beginPath();
-                context.arc(piece * (j - 12 + .5) + middleOffset + j - 12, boardHeight - piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
+                context.arc(piece * (remapped + .5) + middleOffset + remapped, boardHeight - piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
                 context.fill();
                 context.stroke();
               context.closePath();
