@@ -140,7 +140,7 @@ function initGameState()
       initDiceState();
       initTeamScores();
    } else {
-      getAllGameState();
+      pullAllGameState();
    }
 }
 
