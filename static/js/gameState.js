@@ -103,6 +103,12 @@ function initTeamScores()
    gameState[getTeamScoreKey(1)] = '0';
 }
 
+// Push all game state to the server
+function pushAllGameState()
+{
+   gapi.hangout.data.submitDelta(gameState, []);
+}
+
 // Pull all game state from the server
 function pullAllGameState()
 {
@@ -140,6 +146,7 @@ function initGameState()
       clearPlayers();
       initDiceState();
       initTeamScores();
+      pushAllGameState();
    } else {
       pullAllGameState();
    }
