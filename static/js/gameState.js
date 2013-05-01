@@ -112,8 +112,8 @@ function pushAllGameState()
 // Pull all game state from the server
 function pullAllGameState()
 {
-   all_state = gapi.hangout.data.getState();
-   keys = document.getElementById('stateDiv');
+   var all_state = gapi.hangout.data.getState();
+   var keys = document.getElementById('stateDiv');
    for (var key in all_state) {
       keys.innerHTML += " " + key      
    }
@@ -135,7 +135,7 @@ function setStarted()
 // Initialize the game state to default values
 function initGameState()
 {
-   started = getStarted();
+   var started = getStarted();
    if (started != "started") {
       setStarted();
       for (var board = 0; board < numBoards; board++) {
