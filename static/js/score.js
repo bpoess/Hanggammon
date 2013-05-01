@@ -1,5 +1,6 @@
 // Function to update the score for the given team
 function updateScore(teamId, increment)
+{
    var scoreKey = getTeamScoreKey(teamId);
 
    var newScore = gameState[scoreKey] + increment;
