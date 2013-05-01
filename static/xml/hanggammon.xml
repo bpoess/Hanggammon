@@ -126,7 +126,7 @@ function updateDisplayState()
    var stateDiv = document.getElementById('stateDiv');
    stateDiv.innerHTML = gameStateToString();
 
-   var histDiv = document.getElementById('history');
+   var histDiv = document.getElementById('historyDiv');
    histDiv.innerHTML = gapi.hangout.data.getValue("history");
 }
 
