@@ -113,9 +113,8 @@ function pushAllGameState()
 function pullAllGameState()
 {
    var all_state = gapi.hangout.data.getState();
-   var keys = document.getElementById('stateDiv');
    for (var key in all_state) {
-      keys.innerHTML += " " + key      
+      // Nothing
    }
 }
 
