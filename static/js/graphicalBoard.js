@@ -1,7 +1,7 @@
 function gameStateToDisplay()
 {
   // This is the main configurable option... All other sizes based on the piece size.
-  var piece = 40;
+  var piece = 20;
 
   var triangleBase = piece + 1;
   var boardMiddle = triangleBase + 2;
@@ -26,24 +26,24 @@ function gameStateToDisplay()
       context.lineWidth = 1;
   
       // top triangles 
-      for (var i = 0; i < 12; i++) {
+      for (var j = 0; j < 12; j++) {
   
         // alternate black and white
-        if (i % 2 == 0) { 
+        if (j % 2 == 0) { 
           context.fillStyle = '#ffffff';
         } else {
           context.fillStyle = '#000000';
         }
   
         // middle of board offset
-        var middleOffset = Math.floor(i / 6) * boardMiddle;
+        var middleOffset = Math.floor(j / 6) * boardMiddle;
   
         context.beginPath();
     
-          context.moveTo(piece * i + middleOffset + i, 0);
-          context.lineTo(piece * (i + 1) + middleOffset + i, 0);
-          context.lineTo(piece * i + piece / 2 + middleOffset + i, piece * 3);
-          context.lineTo(piece * i + middleOffset + i, 0);
+          context.moveTo(piece * j + middleOffset + j, 0);
+          context.lineTo(piece * (j + 1) + middleOffset + j, 0);
+          context.lineTo(piece * j + piece / 2 + middleOffset + j, piece * 3);
+          context.lineTo(piece * j + middleOffset + j, 0);
           
           context.fill();
           context.stroke();
@@ -52,24 +52,24 @@ function gameStateToDisplay()
       }
   
       // bottom triangles
-      for (var i = 0; i < 12; i++) {
+      for (var j = 0; j < 12; j++) {
   
         // alternate black and white
-        if (i % 2 == 1) { 
+        if (j % 2 == 1) { 
           context.fillStyle = '#ffffff';
         } else {
           context.fillStyle = '#000000';
         }
   
         // middle of board offset
-        var middleOffset = Math.floor(i / 6) * boardMiddle;
+        var middleOffset = Math.floor(j / 6) * boardMiddle;
   
         context.beginPath();
     
-          context.moveTo(piece * i + middleOffset + i, boardHeight);
-          context.lineTo(piece * (i + 1) + middleOffset + i, boardHeight);
-          context.lineTo(piece * i + piece / 2 + middleOffset + i, boardHeight - piece * 3);
-          context.lineTo(piece * i + middleOffset + i, boardHeight);
+          context.moveTo(piece * j + middleOffset + j, boardHeight);
+          context.lineTo(piece * (j + 1) + middleOffset + j, boardHeight);
+          context.lineTo(piece * j + piece / 2 + middleOffset + j, boardHeight - piece * 3);
+          context.lineTo(piece * j + middleOffset + j, boardHeight);
           
           context.fill();
           context.stroke();
