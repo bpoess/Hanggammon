@@ -46,30 +46,6 @@ function pushAllGameState()
    gapi.hangout.data.submitDelta(gameState, []);
 }
 
-// Pull all game state from the server
-function pullAllGameState()
-{
-   all_state = gapi.hangout.data.getState();
-   for (var key in all_state) {
-      print("Key: " + key);
-   }
-}
-
-
-
-// Get the started variable
-function getStarted()
-{
-   return gapi.hangout.data.getValue("started");
-}
-
-// Set started variable to 1
-function setStarted()
-{
-   gapi.hangout.data.setValue("started", 1);
-}
-
-
 // Test code
 //queueStateUpdate('abc', 'some state');
 //queueStateUpdate('dfg', 'some state');
