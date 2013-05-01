@@ -136,7 +136,7 @@ function setStarted()
 function initGameState()
 {
    started = getStarted();
-   if (started == 0) {
+   if (started != 1) {
       setStarted();
       for (var board = 0; board < numBoards; board++) {
          clearBoard(board);
