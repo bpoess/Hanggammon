@@ -57,7 +57,9 @@
    </form>
 </p>
 
+<-- Hidden divs for variables -->
 <div id="stateDiv"></div>
+<div id="started"></div>
 
 <canvas id="board0"></canvas>
 <canvas id="board1"></canvas>

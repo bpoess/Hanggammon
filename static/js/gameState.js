@@ -106,16 +106,20 @@ function initTeamScores()
 // Initialize the game state to default values
 function initGameState()
 {
-   for (var board = 0; board < numBoards; board++) {
-      clearBoard(board);
-      addStandardPiecesToBoard(board);
+   started = getStarted();
+   if (started == 1) {
+      setStarted();
+      for (var board = 0; board < numBoards; board++) {
+         clearBoard(board);
+         addStandardPiecesToBoard(board);
+      }
+
+      clearPlayers();
+      initDiceState();
+      initTeamScores();
+   } else {
+      getAllGameState();
    }
-
-   clearPlayers();
-
-   initDiceState();
-
-   initTeamScores();
 }
 
 // Return a string corresponding to the game state
