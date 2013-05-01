@@ -7,7 +7,7 @@ function gameStateToDisplay()
   var boardMiddle = triangleBase + 2;
   var boardMiddleMargin = boardMiddle / 2;
   var boardWidth = triangleBase * 12 + boardMiddle;
-  var boardHeight = triangleBase * 7;
+  var boardHeight = triangleBase * 14;
 
   var boards = new Array();
   boards[0] = document.getElementById('board0');
@@ -42,7 +42,7 @@ function gameStateToDisplay()
     
           context.moveTo(piece * j + middleOffset + j, 0);
           context.lineTo(piece * (j + 1) + middleOffset + j, 0);
-          context.lineTo(piece * j + piece / 2 + middleOffset + j, piece * 3);
+          context.lineTo(piece * j + piece / 2 + middleOffset + j, piece * 5);
           context.lineTo(piece * j + middleOffset + j, 0);
           
           context.fill();
@@ -68,7 +68,7 @@ function gameStateToDisplay()
     
           context.moveTo(piece * j + middleOffset + j, boardHeight);
           context.lineTo(piece * (j + 1) + middleOffset + j, boardHeight);
-          context.lineTo(piece * j + piece / 2 + middleOffset + j, boardHeight - piece * 3);
+          context.lineTo(piece * j + piece / 2 + middleOffset + j, boardHeight - piece * 5);
           context.lineTo(piece * j + middleOffset + j, boardHeight);
           
           context.fill();
