@@ -152,10 +152,10 @@ function updateDisplayState()
    histDiv.innerHTML = gapi.hangout.data.getValue("history");
    
    var dice1 = document.getElementById('dice1');
-   dice1.innerHTML = gapi.hangout.data.getValue("dice1_value");
+   dice1.innerHTML = gapi.hangout.data.getValue("dice0_value");
 
    var dice2 = document.getElementById('dice2');
-   dice2.innerHTML = gapi.hangout.data.getValue("dice2_value");
+   dice2.innerHTML = gapi.hangout.data.getValue("dice1_value");
 }
 
 // Sync state update coming from the server
