@@ -81,12 +81,16 @@ function gameStateToDisplay()
       context.fillStyle = '#000000';
       context.fillRect(boardWidth / 2 - boardMiddle / 2 + boardMiddleMargin / 2, 0, boardMiddle - boardMiddleMargin, boardHeight);
 
-      context.fillStyle = '#ff0000';
       for (var j = 0; j < numSlotsPerBoard; j++) {
         var slotState = gameState[getSlotKeyOnBoard(i, j)];
         var middleOffset = Math.floor(j / 6) * boardMiddle;
         if (slotState !== undefined) {
           for (var k = 0; k < slotState.length; k++) {
+            if (slotState[k] == '0') {
+              context.fillStyle = '#ff0000';
+            } else {
+              context.fillStyle = '#00ff00';
+            }
             context.beginPath();
               context.arc(piece * (j + .5) + middleOffset + j, piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
               context.fill();
