@@ -42,6 +42,7 @@
 <script src="https://hanggammon.appspot.com/js/gameState.js"></script>
 <script src="https://hanggammon.appspot.com/js/hangoutData.js"></script>
 <script src="https://hanggammon.appspot.com/js/movement.js"></script>
+<script src="https://hanggammon.appspot.com/js/graphicalBoard.js"></script>
 
 <h3>HangGammon</h3>
 
@@ -58,6 +59,9 @@
 
 <div id="stateDiv"></div>
 
+<canvas id="board0"></canvas> 
+<canvas id="board1"></canvas> 
+
 <script>
 
 function movePieceTest()
@@ -70,8 +74,9 @@ function movePieceTest()
 
 function updateDisplayState()
 {
-   var stateDiv = document.getElementById('stateDiv');
-   stateDiv.innerHTML = gameStateToString();
+   gameStateToDisplay();
+   //var stateDiv = document.getElementById('stateDiv');
+   //stateDiv.innerHTML = gameStateToString();
 }
 
 // Sync state update coming from the server
