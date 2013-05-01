@@ -40,12 +40,6 @@ function commitQueuedStateUpdates()
    queuedUpdates = [];
 }
 
-// Push all game state to the server
-function pushAllGameState()
-{
-   gapi.hangout.data.submitDelta(gameState, []);
-}
-
 // Test code
 //queueStateUpdate('abc', 'some state');
 //queueStateUpdate('dfg', 'some state');

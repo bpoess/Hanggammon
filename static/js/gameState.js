@@ -103,12 +103,19 @@ function initTeamScores()
    gameState[getTeamScoreKey(1)] = '0';
 }
 
+// Push all game state to the server
+function pushAllGameState()
+{
+   gapi.hangout.data.submitDelta(gameState, []);
+}
+
 // Pull all game state from the server
 function pullAllGameState()
 {
    all_state = gapi.hangout.data.getState();
+   keys = document.getElementById('stateDiv');
    for (var key in all_state) {
-      print("Key: " + key);
+      keys.innerHTML += " " + key      
    }
 }
 
@@ -121,7 +128,7 @@ function getStarted()
 // Set started variable to 1
 function setStarted()
 {
-   gapi.hangout.data.setValue("started", 1);
+   gapi.hangout.data.setValue("started", "started");
 }
 
 
@@ -129,7 +136,7 @@ function setStarted()
 function initGameState()
 {
    started = getStarted();
-   if (started == 0) {
+   if (started != "started") {
       setStarted();
       for (var board = 0; board < numBoards; board++) {
          clearBoard(board);
@@ -139,6 +146,7 @@ function initGameState()
       clearPlayers();
       initDiceState();
       initTeamScores();
+      pushAllGameState();
    } else {
       pullAllGameState();
    }
