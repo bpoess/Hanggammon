@@ -106,7 +106,9 @@ function initTeamScores()
 // Push all game state to the server
 function pushAllGameState()
 {
-   gapi.hangout.data.submitDelta(gameState, []);
+   for (var key in gameState) {
+      gapi.hangout.data.setValue(key, gameState[key]);
+   }
 }
 
 // Pull all game state from the server
