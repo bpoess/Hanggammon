@@ -81,6 +81,7 @@ function gameStateToDisplay()
       context.fillStyle = '#000000';
       context.fillRect(boardWidth / 2 - boardMiddle / 2 + boardMiddleMargin / 2, 0, boardMiddle - boardMiddleMargin, boardHeight);
 
+      // pieces
       for (var j = 0; j < numSlotsPerBoard; j++) {
         var slotState = gameState[getSlotKeyOnBoard(i, j)];
         if (slotState !== undefined) {
@@ -98,9 +99,9 @@ function gameStateToDisplay()
                 context.stroke();
               context.closePath();
             } else {
-              var middleOffset = Math.floor((12 - j) / 6) * boardMiddle;
+              var middleOffset = Math.floor((j - 12) / 6) * boardMiddle;
               context.beginPath();
-                context.arc(piece * (12 - j + .5) + middleOffset + 12 - j, boardHeight - piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
+                context.arc(piece * (j - 12 + .5) + middleOffset + j - 12, boardHeight - piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
                 context.fill();
                 context.stroke();
               context.closePath();
