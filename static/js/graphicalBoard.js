@@ -13,7 +13,7 @@ function gameStateToDisplay()
   boards[0] = document.getElementById('board0');
   boards[1] = document.getElementById('board1');
 
-  for (var i = 0; i < 2; i++) { 
+  for (var i = 0; i < boards.length; i++) { 
     
     var context = boards[i].getContext("2d");
     if (context) {  
