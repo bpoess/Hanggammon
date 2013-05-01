@@ -41,7 +41,7 @@ function movePiece(boardId, teamId, fromSlot, toSlot)
    // send state update to the server
    commitQueuedStateUpdates();
 
-   history_add("board " + boardId + "team " + teamId + "from " + fromSlot + "to " + toSlot);
+   history_add("board " + boardId + " team " + teamId + " from " + fromSlot + " to " + toSlot);
 }
 
 function rollDice() {
