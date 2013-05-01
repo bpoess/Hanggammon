@@ -95,7 +95,7 @@ function movePieceTest()
 
 function rollDiceTest()
 {
-   rollDice()
+   rollDice();
 }
 
 function team0ScoreInc()
