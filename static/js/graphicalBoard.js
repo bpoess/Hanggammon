@@ -83,7 +83,7 @@ function gameStateToDisplay()
 
       context.fillStyle = '#ff0000';
       for (var j = 0; j < numSlotsPerBoard; j++) {
-        slotState = gameState[getSlotKeyOnBoard(i, j)];
+        var slotState = gameState[getSlotKeyOnBoard(i, j)];
         var middleOffset = Math.floor(j / 6) * boardMiddle;
         if (slotState !== undefined) {
           for (var k = 0; k < slotState.length; k++) {
