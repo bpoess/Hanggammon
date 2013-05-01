@@ -156,24 +156,24 @@ function gameStateToString()
 {
    var returnStr = '';
 
-   for (var i = 0; i < numBoards; i++) {
-      for (var j = 0; j < numSlotsPerBoard; j++) {
-         returnStr += getSlotKeyOnBoard(i, j) + ' = "' +
-                      gameState[getSlotKeyOnBoard(i, j)] + '"\n';
-      }
+   // for (var i = 0; i < numBoards; i++) {
+   //    for (var j = 0; j < numSlotsPerBoard; j++) {
+   //       returnStr += getSlotKeyOnBoard(i, j) + ' = "' +
+   //                    gameState[getSlotKeyOnBoard(i, j)] + '"\n';
+   //    }
 
-      for (var j = 0; j < numTeams; j++) {
-         returnStr += getTeamCollectedKeyOnBoard(i,j) + ' = "' +
-                      gameState[getTeamCollectedKeyOnBoard(i,j)] + '"\n';
-         returnStr += getTeamHitKeyOnBoard(i,j) + ' = "' +
-                      gameState[getTeamHitKeyOnBoard(i,j)] + '"\n';
-      }
-   }
+   //    for (var j = 0; j < numTeams; j++) {
+   //       returnStr += getTeamCollectedKeyOnBoard(i,j) + ' = "' +
+   //                    gameState[getTeamCollectedKeyOnBoard(i,j)] + '"\n';
+   //       returnStr += getTeamHitKeyOnBoard(i,j) + ' = "' +
+   //                    gameState[getTeamHitKeyOnBoard(i,j)] + '"\n';
+   //    }
+   // }
 
-   for (var i = 0; i < numPlayers; i++) {
-      returnStr += getPlayerNameKey(i) + ' = "' +
-                   gameState[getPlayerNameKey(i)] + '"\n';
-   }
+   // for (var i = 0; i < numPlayers; i++) {
+   //    returnStr += getPlayerNameKey(i) + ' = "' +
+   //                 gameState[getPlayerNameKey(i)] + '"\n';
+   // }
 
    for (var i = 0; i < numDice; i++) {
       returnStr += getDiceValueKey(i) + ' = "' +
