@@ -5,6 +5,11 @@ function updateScore(teamId, increment)
 
    var newScore = parseInt(gameState[scoreKey]) + increment;
 
+   // Don't drop below 0
+   if (newScore < 0) {
+      return;
+   }
+
    // Commit score update
    queueStateUpdate(scoreKey, newScore.toString());
    commitQueuedStateUpdates();
