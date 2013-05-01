@@ -86,7 +86,27 @@
 <span id="dice2"></span> 
 <canvas id="board1"></canvas>
 
-<div id="historyDiv">History:<br></div>
+<style type="text/css">
+.scroll{
+    display:block;
+    border: 1px solid red;
+    padding:5px;
+    margin-top:5px;
+    width:300px;
+    height:50px;
+    overflow:scroll;
+    }
+.auto{
+    display:block;
+    border: 1px solid red;
+    padding:5px;
+    margin-top:5px;
+    width:300px;
+    height:50px;
+    overflow:auto;
+    }
+</style>
+<div class="scroll" id="historyDiv">History:<br></div>
 <script>
 
 function movePieceTest()
