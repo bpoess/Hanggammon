@@ -82,6 +82,8 @@
 <div id="started"></div>
 
 <canvas id="board0"></canvas>
+<span id="dice1"></span> 
+<span id="dice2"></span> 
 <canvas id="board1"></canvas>
 
 <div id="historyDiv">History:<br></div>
@@ -128,6 +130,12 @@ function updateDisplayState()
 
    var histDiv = document.getElementById('historyDiv');
    histDiv.innerHTML = gapi.hangout.data.getValue("history");
+   
+   var dice1 = document.getElementById('dice1');
+   dice1.innerHTML = gapi.hangout.data.getValue("dice1_value");
+
+   var dice2 = document.getElementById('dice2');
+   dice2.innerHTML = gapi.hangout.data.getValue("dice2_value");
 }
 
 // Sync state update coming from the server
