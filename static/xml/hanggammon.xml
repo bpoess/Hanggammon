@@ -84,7 +84,7 @@
 <canvas id="board0"></canvas>
 <canvas id="board1"></canvas>
 
-<div id="historyDiv"></div>
+<div id="historyDiv">History:<br></div>
 <script>
 
 function movePieceTest()
