@@ -41,6 +41,7 @@
 <script src="https://hangoutsapi.talkgadget.google.com/hangouts/api/hangout.js?v=1.4" ></script>
 <script src="https://hanggammon.appspot.com/js/gameState.js"></script>
 <script src="https://hanggammon.appspot.com/js/hangoutData.js"></script>
+<script src="https://hanggammon.appspot.com/js/history.js"></script>
 <script src="https://hanggammon.appspot.com/js/movement.js"></script>
 <script src="https://hanggammon.appspot.com/js/graphicalBoard.js"></script>
 <script src="https://hanggammon.appspot.com/js/score.js"></script>
@@ -79,11 +80,11 @@
 
 <div id="stateDiv"></div>
 <div id="started"></div>
-<div id="keys"></div>
 
 <canvas id="board0"></canvas>
 <canvas id="board1"></canvas>
 
+<div id="historyDiv"></div>
 <script>
 
 function movePieceTest()
@@ -124,6 +125,9 @@ function updateDisplayState()
    gameStateToDisplay();
    var stateDiv = document.getElementById('stateDiv');
    stateDiv.innerHTML = gameStateToString();
+
+   var histDiv = document.getElementById('history');
+   histDiv.innerHTML = gapi.hangout.data.getValue("history");
 }
 
 // Sync state update coming from the server
