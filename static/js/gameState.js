@@ -147,7 +147,7 @@ function resetGameState()
    initDiceState();
    initTeamScores();
    pushAllGameState();
-   gapi.hangout.data.setValue("history", "History: <br>");
+   gapi.hangout.data.setValue("history", "");
 }
 
 // Initialize the game state to default values

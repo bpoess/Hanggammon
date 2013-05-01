@@ -106,7 +106,7 @@
     overflow:auto;
     }
 </style>
-<div class="scroll" id="historyDiv">History:<br></div>
+<div class="scroll" id="historyDiv"></div>
 <script>
 
 function movePieceTest()
