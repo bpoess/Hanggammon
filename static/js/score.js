@@ -6,7 +6,7 @@ function updateScore(teamId, increment)
    var newScore = parseInt(gameState[scoreKey]) + increment;
 
    // Commit score update
-   queueStateUpdate(scoreKey, newScore);
+   queueStateUpdate(scoreKey, newScore.toString());
    commitQueuedStateUpdates();
 }
 
