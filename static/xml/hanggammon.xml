@@ -43,6 +43,7 @@
 <script src="https://hanggammon.appspot.com/js/hangoutData.js"></script>
 <script src="https://hanggammon.appspot.com/js/movement.js"></script>
 <script src="https://hanggammon.appspot.com/js/graphicalBoard.js"></script>
+<script src="https://hanggammon.appspot.com/js/score.js"></script>
 
 <h3>HangGammon</h3>
 
@@ -54,6 +55,16 @@
       To slot:    <input type="text" name="moveToSlotText" value="3"><br>
       <input class="button" type="button" value="Move piece!" id="movePieceButton"
        onClick="movePieceTest()"/>
+   </form>
+   <form name="scoreForm">
+      <input class="button" type="button" value="Team0 +1" id="team0IncButton"
+       onClick="team0ScoreInc()" style="display:inline"/>
+      <input class="button" type="button" value="Team1 +1" id="team1IncButton"
+       onClick="team1ScoreInc()" style="display:inline"/>
+      <input class="button" type="button" value="Team0 -1" id="team0DecButton"
+       onClick="team0ScoreDec()" style="display:inline"/>
+      <input class="button" type="button" value="Team1 -1" id="team1DecButton"
+       onClick="team1ScoreDec()" style="display:inline"/>
    </form>
 </p>
 
@@ -72,6 +83,26 @@ function movePieceTest()
              document.moveForm.moveTeamText.value,
              document.moveForm.moveFromSlotText.value,
              document.moveForm.moveToSlotText.value);
+}
+
+function team0ScoreInc()
+{
+   incScore(0);
+}
+
+function team1ScoreInc()
+{
+   incScore(1);
+}
+
+function team0ScoreDec()
+{
+   decScore(0);
+}
+
+function team1ScoreDec()
+{
+   decScore(1);
 }
 
 function updateDisplayState()
