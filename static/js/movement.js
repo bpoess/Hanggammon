@@ -41,3 +41,30 @@ function movePiece(boardId, teamId, fromSlot, toSlot)
    // send state update to the server
    commitQueuedStateUpdates();
 }
+
+function rollDice() {
+   var MAX_DICE_VALUE = 6
+   // Calling Math.seedrandom() which will seed Math.random with hopefully a very good seed
+   Math.seedrandom()
+
+   // The following code will give us a value between 0 and MAX_DICE_VALUE (non-inclusive)
+   // Need to add one for 1 through MAX_DICE_VALUE (inclusive)
+   var diceOne = Math.floor(Math.random() * MAX_DICE_VALUE) + 1
+
+   // Call Math.seedrandom() to re-seed before generating dice2
+   Math.seedrandom()
+   var diceTwo = Math.floor(Math.random() * MAX_DICE_VALUE) + 1
+
+   // Grab the key values for dice 1 and 2
+   var diceOneKey = getDiceValueKey(1)
+   var diceTwoKey = getDiceValueKey(2)
+
+   // Queue update to dice1
+   queueStateUpdate(diceOneKey, diceOne);
+
+   // Queue update to dice2
+   queueStateUpdate(diceTwoKey, diceTwo);
+
+   // send state update to the server
+   commitQueuedStateUpdates();
+}
