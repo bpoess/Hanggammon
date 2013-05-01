@@ -85,13 +85,15 @@ function gameStateToDisplay()
       for (var j = 0; j < numSlotsPerBoard; j++) {
         slotState = gameState[getSlotKeyOnBoard(i, j)];
         var middleOffset = Math.floor(j / 6) * boardMiddle;
-        for (var k = 0; k < slotState.length; k++) {
-          context.beginPath();
-            context.arc(piece * (j + .5) + middleOffset, piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
-            context.fill();
-            context.stroke();
-          context.closePath();
-        } 
+        if (slotState !== undefined) {
+          for (var k = 0; k < slotState.length; k++) {
+            context.beginPath();
+              context.arc(piece * (j + .5) + middleOffset, piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
+              context.fill();
+              context.stroke();
+            context.closePath();
+          }
+        }
       }
     }
   }
