@@ -3,7 +3,7 @@ function updateScore(teamId, increment)
 {
    var scoreKey = getTeamScoreKey(teamId);
 
-   var newScore = gameState[scoreKey] + increment;
+   var newScore = parseInt(gameState[scoreKey]) + increment;
 
    // Commit score update
    queueStateUpdate(scoreKey, newScore);
