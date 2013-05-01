@@ -91,11 +91,20 @@ function gameStateToDisplay()
             } else {
               context.fillStyle = '#00ff00';
             }
-            context.beginPath();
-              context.arc(piece * (j + .5) + middleOffset + j, piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
-              context.fill();
-              context.stroke();
-            context.closePath();
+            if (j <= 11) {
+              context.beginPath();
+                context.arc(piece * (j + .5) + middleOffset + j, piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
+                context.fill();
+                context.stroke();
+              context.closePath();
+            } else {
+              context.beginPath();
+                context.arc(piece * (j + .5) + middleOffset + j, boardHeight - piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
+                context.fill();
+                context.stroke();
+              context.closePath();
+
+            }
           }
         }
       }
