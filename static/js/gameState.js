@@ -128,7 +128,7 @@ function getStarted()
 // Set started variable to 1
 function setStarted()
 {
-   gapi.hangout.data.setValue("started", 1);
+   gapi.hangout.data.setValue("started", "started");
 }
 
 
@@ -136,7 +136,7 @@ function setStarted()
 function initGameState()
 {
    started = getStarted();
-   if (started != 1) {
+   if (started != "started") {
       setStarted();
       for (var board = 0; board < numBoards; board++) {
          clearBoard(board);
