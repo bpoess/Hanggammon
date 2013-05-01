@@ -59,8 +59,8 @@
 
 <div id="stateDiv"></div>
 
-<canvas id="board0"></canvas> 
-<canvas id="board1"></canvas> 
+<canvas id="board0"></canvas>
+<canvas id="board1"></canvas>
 
 <script>
 
@@ -75,8 +75,8 @@ function movePieceTest()
 function updateDisplayState()
 {
    gameStateToDisplay();
-   //var stateDiv = document.getElementById('stateDiv');
-   //stateDiv.innerHTML = gameStateToString();
+   var stateDiv = document.getElementById('stateDiv');
+   stateDiv.innerHTML = gameStateToString();
 }
 
 // Sync state update coming from the server
