@@ -83,7 +83,6 @@ function gameStateToDisplay()
 
       for (var j = 0; j < numSlotsPerBoard; j++) {
         var slotState = gameState[getSlotKeyOnBoard(i, j)];
-        var middleOffset = Math.floor(j / 6) * boardMiddle;
         if (slotState !== undefined) {
           for (var k = 0; k < slotState.length; k++) {
             if (slotState[k] == '0') {
@@ -92,18 +91,19 @@ function gameStateToDisplay()
               context.fillStyle = '#00ff00';
             }
             if (j <= 11) {
+              var middleOffset = Math.floor(j / 6) * boardMiddle;
               context.beginPath();
                 context.arc(piece * (j + .5) + middleOffset + j, piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
                 context.fill();
                 context.stroke();
               context.closePath();
             } else {
+              var middleOffset = Math.floor((12 - j) / 6) * boardMiddle;
               context.beginPath();
                 context.arc(piece * (12 - j + .5) + middleOffset + 12 - j, boardHeight - piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
                 context.fill();
                 context.stroke();
               context.closePath();
-
             }
           }
         }
