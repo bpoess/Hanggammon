@@ -48,6 +48,12 @@
 <h3>HangGammon</h3>
 
 <p>
+    <input class="button" type="button" value="Reset Game" id="resetGameButton"
+        onClick="resetGameState()" style="display:inline"/>
+</p>
+
+
+<p>
    <form name="moveForm">
       Team:       <input type="text" name="moveTeamText" value="0"><br>
       From board: <input type="text" name="moveBoardText" value="0"><br>

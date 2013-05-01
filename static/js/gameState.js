@@ -135,21 +135,27 @@ function setStarted()
 }
 
 
+// Reset the game state
+function resetGameState()
+{
+   for (var board = 0; board < numBoards; board++) {
+      clearBoard(board);
+      addStandardPiecesToBoard(board);
+   }
+
+   clearPlayers();
+   initDiceState();
+   initTeamScores();
+   pushAllGameState();
+}
+
 // Initialize the game state to default values
 function initGameState()
 {
    var started = getStarted();
    if (started != "started") {
       setStarted();
-      for (var board = 0; board < numBoards; board++) {
-         clearBoard(board);
-         addStandardPiecesToBoard(board);
-      }
-
-      clearPlayers();
-      initDiceState();
-      initTeamScores();
-      pushAllGameState();
+      resetGameState();
    } else {
       pullAllGameState();
    }
