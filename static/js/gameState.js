@@ -107,8 +107,9 @@ function initTeamScores()
 function pullAllGameState()
 {
    all_state = gapi.hangout.data.getState();
+   keys = document.getElementById('stateDiv');
    for (var key in all_state) {
-      print("Key: " + key);
+      keys.innerHTML += " " + key      
    }
 }
 
