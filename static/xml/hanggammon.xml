@@ -61,6 +61,8 @@
       To slot:    <input type="text" name="moveToSlotText" value="3"><br>
       <input class="button" type="button" value="Move piece!" id="movePieceButton"
        onClick="movePieceTest()"/>
+      <input class="button" type="button" value="Roll 'em" id="rollDiceButton"
+       onClick="rollDiceTest()"/>
    </form>
    <form name="scoreForm">
       <input class="button" type="button" value="Team0 +1" id="team0IncButton"
@@ -89,6 +91,11 @@ function movePieceTest()
              document.moveForm.moveTeamText.value,
              document.moveForm.moveFromSlotText.value,
              document.moveForm.moveToSlotText.value);
+}
+
+function rollDiceTest()
+{
+   rollDice()
 }
 
 function team0ScoreInc()
