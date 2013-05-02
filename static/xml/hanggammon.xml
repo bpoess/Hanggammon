@@ -171,6 +171,9 @@ function onStateChange(changeEvent)
 }
 
 function init() {
+   // Calling Math.seedrandom() which will seed Math.random with hopefully a very good seed for the dice
+   Math.seedrandom();
+
    // When API is ready...
    gapi.hangout.onApiReady.add(
       function(eventObj) {
