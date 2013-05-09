@@ -153,7 +153,7 @@ function updateDisplayState()
    var hist_len = parseInt(gapi.hangout.data.getValue("history_len"));
    for (var i = hist_len - 1; i < hist_len - 1 + 200; i++) {
       hist = gapi.hangout.data.getValue("history_" + (i % 200).toString());
-      if (hist != "undefined") {
+      if (hist != undefined) {
           histDiv.innerHTML += hist;
       }
    }
