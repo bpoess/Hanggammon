@@ -13,6 +13,12 @@ team[0] = {pieceChar : '0'};
 team[1] = {pieceChar : '1'};
 var numTeams = team.length;
 
+// Return the state key for a piece on the given board with the given team
+function getPieceKeyOnBoard(boardId, teamId, pieceId)
+{
+   return 'board' + boardId + '_team' + teamId + '_piece' _ pieceId;
+}
+
 // Return the state key for a given slot in the given board
 function getSlotKeyOnBoard(boardId, slotId)
 {
