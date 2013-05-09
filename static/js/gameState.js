@@ -181,10 +181,11 @@ function resetGameState()
    initDiceState();
    initTeamScores();
    pushAllGameState();
-   gapi.hangout.data.setValue("history_len", "0");
+   queueStateUpdate("history_len", "0");
    for (var hist_id = 0; hist_id < 200; hist_id++) {
-      //gapi.hangout.data.setValue("history_" + hist_id.toString(), "");
+      queueStateUpdate("history_" + hist_id.toString(), "");
    }
+   commitQueuedStateUpdates();
 }
 
 // Initialize the game state to default values
