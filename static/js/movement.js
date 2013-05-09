@@ -6,7 +6,7 @@ function movePiece(boardId, teamId, fromSlot, toSlot)
    for (piece = 0; piece < numPiecesPerBoard; piece++) {
       var state = gameState[getPieceKeyOnBoard(boardId, teamId, piece)];
       if (state === fromSlot) {
-         movePiece = fromSlot;
+         movePiece = piece;
          break;
       }
    }
