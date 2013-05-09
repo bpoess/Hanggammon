@@ -182,7 +182,7 @@ function resetGameState()
    initTeamScores();
    pushAllGameState();
    queueStateUpdate("history_len", "0");
-   for (var hist_id = 0; hist_id < 200; hist_id++) {
+   for (var hist_id = 0; hist_id < 10; hist_id++) {
       queueStateUpdate("history_" + hist_id.toString(), "");
       if (hist_id + 1 % 40 == 0) {
          commitQueuedStateUpdates();

@@ -31,6 +31,6 @@ function history_add(msg)
    var hist_index = 0;
    hist_index += 1;
    gapi.hangout.data.setValue("history_len", hist_index.toString());
-   var hist_current = gapi.hangout.data.getValue("history_" + ((hist_index - 1) % 200).toString());
-   gapi.hangout.data.setValue("history_" + ((hist_index - 1) % 200).toString(), hist);
+   var hist_current = gapi.hangout.data.getValue("history_" + ((hist_index - 1) % 10).toString());
+   gapi.hangout.data.setValue("history_" + ((hist_index - 1) % 10).toString(), hist);
 }
