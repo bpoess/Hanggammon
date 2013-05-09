@@ -12,16 +12,6 @@ function initGraphicalBoardEventHandlers()
   board1.addEventListener("mousedown", mouseDownListenerOne, false);
 }
 
-function mouseDownListenerZero(e)
-{
-  boardClicked[0] = !boardClicked[0];
-}
-
-function mouseDownListenerOne(e)
-{
-  boardClicked[1] = !boardClicked[1];
-}
-
 function makeZeroFilledIntArray(length)
 {
   var arr = [], i = length;
@@ -163,4 +153,14 @@ function gameStateToDisplay()
   }
 }
 
+function mouseDownListenerZero(e)
+{
+  boardClicked[0] = !boardClicked[0];
+  gameStateToDisplay();
+}
 
+function mouseDownListenerOne(e)
+{
+  boardClicked[1] = !boardClicked[1];
+  gameStateToDisplay();
+}
