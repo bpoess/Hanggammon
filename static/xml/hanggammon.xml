@@ -43,6 +43,7 @@
 <script src="https://hanggammon.appspot.com/js/hangoutData.js"></script>
 <script src="https://hanggammon.appspot.com/js/history.js"></script>
 <script src="https://hanggammon.appspot.com/js/movement.js"></script>
+<script src="https://hanggammon.appspot.com/js/dice.js"></script>
 <script src="https://hanggammon.appspot.com/js/graphicalBoard.js"></script>
 <script src="https://hanggammon.appspot.com/js/score.js"></script>
 <script src="https://hanggammon.appspot.com/js/seedrandom.js"></script>
