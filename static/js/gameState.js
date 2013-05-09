@@ -8,7 +8,7 @@ var numPlayers = 4;
 var numDice = 2;
 
 // Team definitions
-var numTeams = team.length;
+var numTeams = 2;
 
 // State definitions
 pieceState = {
