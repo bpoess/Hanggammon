@@ -105,7 +105,7 @@ function gameStateToDisplay()
           if (stateString !== undefined) {
             var stateInt = parseInt(stateString);
             if (stateInt <= 11) { // one side of board
-              var middleOffset = Math.floor(j / 6) * boardMiddle;
+              var middleOffset = Math.floor(stateInt / 6) * boardMiddle;
               context.beginPath();
                 context.arc(piece * (stateInt + .5) + middleOffset + stateInt, piece * (numPiecesPerSlot[stateInt] + .5), piece * .5, 0, 2 * Math.PI, false);
                 context.fill();
