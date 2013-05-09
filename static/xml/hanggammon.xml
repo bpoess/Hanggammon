@@ -150,7 +150,7 @@ function updateDisplayState()
    stateDiv.innerHTML = gameStateToString();
 
    var histDiv = document.getElementById('historyDiv');
-   var hist_len = gapi.hangout.data.getValue("history_len").toInteger();
+   var hist_len = parseInt(gapi.hangout.data.getValue("history_len"));
    for (var i = hist_len - 1; i < hist_len - 1 + 200; i++) {
       histDiv.innerHTML += gapi.hangout.data.getValue("history_" + (i % 200));
    }
