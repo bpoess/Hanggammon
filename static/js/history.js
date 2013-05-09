@@ -1,8 +1,8 @@
 function history_add(msg)
 {
    // first part of history is the timestamp
-   var datetime = currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + seconds;
    var currentdate = new Date();
+   var datetime = currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + seconds;
    var seconds = currentdate.getSeconds();
    if (seconds == "0") {
       seconds = "00"
