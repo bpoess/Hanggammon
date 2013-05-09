@@ -61,40 +61,40 @@ function clearBoard(boardId)
 function movePiecesToStandardLocations(boardId)
 {
    // Team 0
-   gameState[getPieceKeyOnBoard(boardId, 0, 0)] = IN_SLOT_0.toString();
-   gameState[getPieceKeyOnBoard(boardId, 0, 1)] = IN_SLOT_0.toString();
-   gameState[getPieceKeyOnBoard(boardId, 0, 2)] = IN_SLOT_11.toString();
-   gameState[getPieceKeyOnBoard(boardId, 0, 3)] = IN_SLOT_11.toString();
-   gameState[getPieceKeyOnBoard(boardId, 0, 4)] = IN_SLOT_11.toString();
-   gameState[getPieceKeyOnBoard(boardId, 0, 5)] = IN_SLOT_11.toString();
-   gameState[getPieceKeyOnBoard(boardId, 0, 6)] = IN_SLOT_11.toString();
-   gameState[getPieceKeyOnBoard(boardId, 0, 7)] = IN_SLOT_16.toString();
-   gameState[getPieceKeyOnBoard(boardId, 0, 8)] = IN_SLOT_16.toString();
-   gameState[getPieceKeyOnBoard(boardId, 0, 9)] = IN_SLOT_16.toString();
-   gameState[getPieceKeyOnBoard(boardId, 0, 10)] = IN_SLOT_18.toString();
-   gameState[getPieceKeyOnBoard(boardId, 0, 11)] = IN_SLOT_18.toString();
-   gameState[getPieceKeyOnBoard(boardId, 0, 12)] = IN_SLOT_18.toString();
-   gameState[getPieceKeyOnBoard(boardId, 0, 13)] = IN_SLOT_18.toString();
-   gameState[getPieceKeyOnBoard(boardId, 0, 14)] = IN_SLOT_18.toString();
-   gameState[getPieceKeyOnBoard(boardId, 0, 15)] = IN_SLOT_18.toString();
+   gameState[getPieceKeyOnBoard(boardId, 0, 0)] = pieceState.IN_SLOT_0.toString();
+   gameState[getPieceKeyOnBoard(boardId, 0, 1)] = pieceState.IN_SLOT_0.toString();
+   gameState[getPieceKeyOnBoard(boardId, 0, 2)] = pieceState.IN_SLOT_11.toString();
+   gameState[getPieceKeyOnBoard(boardId, 0, 3)] = pieceState.IN_SLOT_11.toString();
+   gameState[getPieceKeyOnBoard(boardId, 0, 4)] = pieceState.IN_SLOT_11.toString();
+   gameState[getPieceKeyOnBoard(boardId, 0, 5)] = pieceState.IN_SLOT_11.toString();
+   gameState[getPieceKeyOnBoard(boardId, 0, 6)] = pieceState.IN_SLOT_11.toString();
+   gameState[getPieceKeyOnBoard(boardId, 0, 7)] = pieceState.IN_SLOT_16.toString();
+   gameState[getPieceKeyOnBoard(boardId, 0, 8)] = pieceState.IN_SLOT_16.toString();
+   gameState[getPieceKeyOnBoard(boardId, 0, 9)] = pieceState.IN_SLOT_16.toString();
+   gameState[getPieceKeyOnBoard(boardId, 0, 10)] = pieceState.IN_SLOT_18.toString();
+   gameState[getPieceKeyOnBoard(boardId, 0, 11)] = pieceState.IN_SLOT_18.toString();
+   gameState[getPieceKeyOnBoard(boardId, 0, 12)] = pieceState.IN_SLOT_18.toString();
+   gameState[getPieceKeyOnBoard(boardId, 0, 13)] = pieceState.IN_SLOT_18.toString();
+   gameState[getPieceKeyOnBoard(boardId, 0, 14)] = pieceState.IN_SLOT_18.toString();
+   gameState[getPieceKeyOnBoard(boardId, 0, 15)] = pieceState.IN_SLOT_18.toString();
 
    // Team 1
-   gameState[getPieceKeyOnBoard(boardId, 1, 0)] = IN_SLOT_23.toString();
-   gameState[getPieceKeyOnBoard(boardId, 1, 1)] = IN_SLOT_23.toString();
-   gameState[getPieceKeyOnBoard(boardId, 1, 2)] = IN_SLOT_12.toString();
-   gameState[getPieceKeyOnBoard(boardId, 1, 3)] = IN_SLOT_12.toString();
-   gameState[getPieceKeyOnBoard(boardId, 1, 4)] = IN_SLOT_12.toString();
-   gameState[getPieceKeyOnBoard(boardId, 1, 5)] = IN_SLOT_12.toString();
-   gameState[getPieceKeyOnBoard(boardId, 1, 6)] = IN_SLOT_12.toString();
-   gameState[getPieceKeyOnBoard(boardId, 1, 7)] = IN_SLOT_7.toString();
-   gameState[getPieceKeyOnBoard(boardId, 1, 8)] = IN_SLOT_7.toString();
-   gameState[getPieceKeyOnBoard(boardId, 1, 9)] = IN_SLOT_7.toString();
-   gameState[getPieceKeyOnBoard(boardId, 1, 10)] = IN_SLOT_5.toString();
-   gameState[getPieceKeyOnBoard(boardId, 1, 11)] = IN_SLOT_5.toString();
-   gameState[getPieceKeyOnBoard(boardId, 1, 12)] = IN_SLOT_5.toString();
-   gameState[getPieceKeyOnBoard(boardId, 1, 13)] = IN_SLOT_5.toString();
-   gameState[getPieceKeyOnBoard(boardId, 1, 14)] = IN_SLOT_5.toString();
-   gameState[getPieceKeyOnBoard(boardId, 1, 15)] = IN_SLOT_5.toString();
+   gameState[getPieceKeyOnBoard(boardId, 1, 0)] = pieceState.IN_SLOT_23.toString();
+   gameState[getPieceKeyOnBoard(boardId, 1, 1)] = pieceState.IN_SLOT_23.toString();
+   gameState[getPieceKeyOnBoard(boardId, 1, 2)] = pieceState.IN_SLOT_12.toString();
+   gameState[getPieceKeyOnBoard(boardId, 1, 3)] = pieceState.IN_SLOT_12.toString();
+   gameState[getPieceKeyOnBoard(boardId, 1, 4)] = pieceState.IN_SLOT_12.toString();
+   gameState[getPieceKeyOnBoard(boardId, 1, 5)] = pieceState.IN_SLOT_12.toString();
+   gameState[getPieceKeyOnBoard(boardId, 1, 6)] = pieceState.IN_SLOT_12.toString();
+   gameState[getPieceKeyOnBoard(boardId, 1, 7)] = pieceState.IN_SLOT_7.toString();
+   gameState[getPieceKeyOnBoard(boardId, 1, 8)] = pieceState.IN_SLOT_7.toString();
+   gameState[getPieceKeyOnBoard(boardId, 1, 9)] = pieceState.IN_SLOT_7.toString();
+   gameState[getPieceKeyOnBoard(boardId, 1, 10)] = pieceState.IN_SLOT_5.toString();
+   gameState[getPieceKeyOnBoard(boardId, 1, 11)] = pieceState.IN_SLOT_5.toString();
+   gameState[getPieceKeyOnBoard(boardId, 1, 12)] = pieceState.IN_SLOT_5.toString();
+   gameState[getPieceKeyOnBoard(boardId, 1, 13)] = pieceState.IN_SLOT_5.toString();
+   gameState[getPieceKeyOnBoard(boardId, 1, 14)] = pieceState.IN_SLOT_5.toString();
+   gameState[getPieceKeyOnBoard(boardId, 1, 15)] = pieceState.IN_SLOT_5.toString();
 }
 
 // Return state key for player name
