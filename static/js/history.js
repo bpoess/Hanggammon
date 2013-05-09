@@ -4,19 +4,22 @@ function history_add(msg)
    var currentdate = new Date();
 
    var hours = currentdate.getHours();
-   if (hours < 10)
-      hours = "0" + hours
+   if (hours < 10) {
+      hours = "0" + hours;
+   }
 
    var seconds = currentdate.getSeconds();
-   if (seconds < 10)
-      seconds = "0" + seconds
+   if (seconds < 10) {
+      seconds = "0" + seconds;
+   }
 
    var minutes = currentdate.getMinutes();
-   if (minutes < 10)
-      minutes = "0" + minutes
+   if (minutes < 10) {
+      minutes = "0" + minutes;
+   }
 
    var datetime = hours + ":" + minutes + ":" + seconds;
-   var hist = "[" + datetime + "]"
+   var hist = "[" + datetime + "]";
 
    // append user name
    hist += " " + gapi.hangout.getLocalParticipant().person.displayName;
@@ -24,8 +27,10 @@ function history_add(msg)
    // finally the actual message
    hist += " " + msg + "<br>";
 
-   var hist_index = parseInt(gapi.hangout.data.getValue("history_len"));
+   var hist_index_str gapi.hangout.data.getValue("history_len");
+   var hist_index = parseInt(hist_index_str);
    hist_index += 1;
-   gapi.hangout.data.setValue("history_len", hist_index.toString()) 
+   gapi.hangout.data.setValue("history_len", hist_index.toString());
+   var hist_current = gapi.hangout.data.getValue("history_" + ((hist_index - 1) % 200).toString());
    gapi.hangout.data.setValue("history_" + ((hist_index - 1) % 200).toString(), hist);
 }
