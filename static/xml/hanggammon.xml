@@ -150,7 +150,10 @@ function updateDisplayState()
    stateDiv.innerHTML = gameStateToString();
 
    var histDiv = document.getElementById('historyDiv');
-   histDiv.innerHTML = gapi.hangout.data.getValue("history");
+   var hist_len = gapi.hangout.data.getValue("history_len").toInteger();
+   for (var i = hist_len - 1; i < hist_len - 1 + 200; i++) {
+      histDiv.innerHTML += gapi.hangout.data.getValue("history_" + (i % 200));
+   }
    
    var dice1 = document.getElementById('dice1');
    dice1.innerHTML = gapi.hangout.data.getValue("dice0_value");
