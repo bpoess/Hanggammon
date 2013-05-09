@@ -145,7 +145,7 @@ function team1ScoreDec()
 
 function updateDisplayState()
 {
-   gameStateToDisplay();
+   //gameStateToDisplay();
    var stateDiv = document.getElementById('stateDiv');
    stateDiv.innerHTML = gameStateToString();
 
