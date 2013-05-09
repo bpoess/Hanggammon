@@ -44,7 +44,7 @@ pieceState = {
 // Return the state key for a piece on the given board with the given team
 function getPieceKeyOnBoard(boardId, teamId, pieceId)
 {
-   return 'board' + boardId + '_team' + teamId + '_piece' _ pieceId;
+   return 'board' + boardId + '_team' + teamId + '_piece' + pieceId;
 }
 
 // Initialize the given board to be empty
