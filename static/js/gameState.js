@@ -150,7 +150,7 @@ function pullAllGameState()
 {
    var all_state = gapi.hangout.data.getState();
    for (var key in all_state) {
-      if (key != "started") {
+      if (key != "started" && key != "history") {
          gameState[key] = all_state[key];
       }
    }
