@@ -107,13 +107,13 @@ function gameStateToDisplay()
             if (stateInt <= 11) { // one side of board
               var middleOffset = Math.floor(j / 6) * boardMiddle;
               context.beginPath();
-                context.arc(piece * (j + .5) + middleOffset + j, piece * (numPiecesPerSlot[stateInt] + .5), piece * .5, 0, 2 * Math.PI, false);
+                context.arc(piece * (stateInt + .5) + middleOffset + stateInt, piece * (numPiecesPerSlot[stateInt] + .5), piece * .5, 0, 2 * Math.PI, false);
                 context.fill();
                 context.stroke();
               context.closePath();
               numPiecesPerSlot[stateInt]++;
             } else if (stateInt <= 23) { // other side of board
-              var remapped = Math.abs(j - 23)
+              var remapped = Math.abs(stateInt - 23)
               var middleOffset = Math.floor(remapped / 6) * boardMiddle;
               context.beginPath();
                 context.arc(piece * (remapped + .5) + middleOffset + remapped, boardHeight - piece * (numPiecesPerSlot[stateInt] + .5), piece * .5, 0, 2 * Math.PI, false);
