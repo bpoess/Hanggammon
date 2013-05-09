@@ -145,9 +145,9 @@ function team1ScoreDec()
 
 function updateDisplayState()
 {
-   //gameStateToDisplay();
-   var stateDiv = document.getElementById('stateDiv');
-   stateDiv.innerHTML = gameStateToString();
+   gameStateToDisplay();
+   //var stateDiv = document.getElementById('stateDiv');
+   //stateDiv.innerHTML = gameStateToString();
 
    var histDiv = document.getElementById('historyDiv');
    var hist_len = parseInt(gapi.hangout.data.getValue("history_len"));
