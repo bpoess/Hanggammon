@@ -192,6 +192,8 @@ function init() {
          }
       }
    );
+
+   initGraphicalBoardEventHandlers(); 
 }
 
 // Wait for gadget to load.

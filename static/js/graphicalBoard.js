@@ -1,3 +1,27 @@
+var boardClicked = [];
+
+function initGraphicalBoardEventHandlers()
+{
+  var board0 = document.getElementById('board0');
+  var board1 = document.getElementById('board1');
+
+  boardClicked[0] = false;
+  boardClicked[1] = false;
+
+  board0.addEventListener("mousedown", mouseDownListenerZero, false);
+  board1.addEventListener("mousedown", mouseDownListenerOne, false);
+}
+
+function mouseDownListenerZero(e)
+{
+  boardClicked[0] = !boardClicked[0];
+}
+
+function mouseDownListenerOne(e)
+{
+  boardClicked[1] = !boardClicked[1];
+}
+
 function makeZeroFilledIntArray(length)
 {
   var arr = [], i = length;
@@ -28,7 +52,11 @@ function gameStateToDisplay()
     if (context) {  
       boards[i].width = boardWidth;
       boards[i].height = boardHeight;
-      boards[i].setAttribute('style', 'border:1px solid #000000;');
+      if (boardClicked[i]) {
+        boards[i].setAttribute('style', 'border:1px solid #ff0000;');
+      } else {
+        boards[i].setAttribute('style', 'border:1px solid #000000;');
+      }
   
       // Set the style properties.
       context.strokeStyle = '#000000';
@@ -134,3 +162,5 @@ function gameStateToDisplay()
     }
   }
 }
+
+
