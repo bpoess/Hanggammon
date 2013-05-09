@@ -1,3 +1,12 @@
+function makeZeroFilledIntArray(length)
+{
+  var arr = [], i = length;
+  while (i--) {
+    arr[i] = 0;
+  }
+  return arr; 
+}
+
 function gameStateToDisplay()
 {
   // This is the main configurable option... All other sizes based on the piece size.
@@ -29,7 +38,7 @@ function gameStateToDisplay()
       for (var j = 0; j < 12; j++) {
   
         // alternate black and white
-        if (j % 2 == 0) { 
+        if (j % 2 === 0) { 
           context.fillStyle = '#ffffff';
         } else {
           context.fillStyle = '#000000';
@@ -55,7 +64,7 @@ function gameStateToDisplay()
       for (var j = 0; j < 12; j++) {
   
         // alternate black and white
-        if (j % 2 == 1) { 
+        if (j % 2 === 1) { 
           context.fillStyle = '#ffffff';
         } else {
           context.fillStyle = '#000000';
@@ -81,31 +90,43 @@ function gameStateToDisplay()
       context.fillStyle = '#000000';
       context.fillRect(boardWidth / 2 - boardMiddle / 2 + boardMiddleMargin / 2, 0, boardMiddle - boardMiddleMargin, boardHeight);
 
-      // pieces
-      for (var j = 0; j < numSlotsPerBoard; j++) {
-        var slotState = gameState[getSlotKeyOnBoard(i, j)];
-        if (slotState !== undefined) {
-          for (var k = 0; k < slotState.length; k++) {
-            if (slotState[k] == '0') {
-              context.fillStyle = '#ff0000';
-            } else {
-              context.fillStyle = '#00ff00';
-            }
-            if (j <= 11) {
+      var numPiecesPerSlot = makeZeroFilledIntArray(24);
+
+      // draw pieces
+      for (var j = 0; j < 2; j++) { 
+        if (j === 0) {
+          context.fillStyle = '#ff0000';
+        } else {
+          context.fillStyle = '#00ff00';
+        }
+
+        for (var k = 0; k < numPiecesPerBoard; k++) {
+          var stateString = gameState[getPieceKeyOnBoard(i, j, k)];
+          if (stateString !== undefined) {
+            var stateInt = parseInt(stateString);
+            if (stateInt <= 11) { // one side of board
               var middleOffset = Math.floor(j / 6) * boardMiddle;
               context.beginPath();
-                context.arc(piece * (j + .5) + middleOffset + j, piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
+                context.arc(piece * (j + .5) + middleOffset + j, piece * (numPiecesPerSlot[stateInt] + .5), piece * .5, 0, 2 * Math.PI, false);
                 context.fill();
                 context.stroke();
               context.closePath();
-            } else {
+              numPiecesPerSlot[stateInt]++;
+            } else if (stateInt <= 23) { // other side of board
               var remapped = Math.abs(j - 23)
               var middleOffset = Math.floor(remapped / 6) * boardMiddle;
               context.beginPath();
-                context.arc(piece * (remapped + .5) + middleOffset + remapped, boardHeight - piece * (k + .5), piece * .5, 0, 2 * Math.PI, false);
+                context.arc(piece * (remapped + .5) + middleOffset + remapped, boardHeight - piece * (numPiecesPerSlot[stateInt] + .5), piece * .5, 0, 2 * Math.PI, false);
                 context.fill();
                 context.stroke();
               context.closePath();
+              numPiecesPerSlot[stateInt]++;
+            } else if (stateInt === pieceState.MOVING) {
+            
+            } else if (stateInt === pieceState.HIT) {
+
+            } else if (stateInt === pieceState.PICKED_UP) {
+
             }
           }
         }
