@@ -40,7 +40,7 @@ function movePiece(boardId, teamId, fromSlot, toSlot)
    if (numOpposingPieces == 1) {
       // Hit the piece
       queueStateUpdate(getPieceKeyOnBoard(boardId, opposingTeam,
-                                          parseInt(opposingPiece)),
+                                          parseInt(pieceToHit)),
                        pieceState.HIT.toString());
    }
 
