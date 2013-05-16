@@ -108,7 +108,7 @@ function gameStateToDisplay()
       context.fillStyle = '#000000';
       context.fillRect(boardWidth / 2 - boardMiddle / 2 + boardMiddleMargin / 2, 0, boardMiddle - boardMiddleMargin, boardHeight);
 
-      var numPiecesPerSlot = makeZeroFilledIntArray(24);
+      var numPiecesPerSlot = makeZeroFilledIntArray(26);
 
       // draw pieces
       for (var j = 0; j < 2; j++) { 
@@ -142,7 +142,14 @@ function gameStateToDisplay()
             } else if (stateInt === pieceState.MOVING) {
             
             } else if (stateInt === pieceState.HIT) {
-
+               context.beginPath();
+                context.arc(boardWidth / 2,
+                            (boardHeight / 2) + piece * numPiecesPerSlot[stateInt],
+                            piece * .5, 0, 2 * Math.PI, false);
+                context.fill();
+                context.stroke();
+               context.closePath();
+               numPiecesPerSlot[stateInt]++;
             } else if (stateInt === pieceState.PICKED_UP) {
 
             }
