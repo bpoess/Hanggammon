@@ -112,6 +112,7 @@ function gameStateToDisplay()
     if (context) {  
       boards[i].width = boardWidth;
       boards[i].height = boardHeight;
+      boards[i].setAttribute('style', 'border:1px solid #000000;');
 
       // Set the style properties.
       context.strokeStyle = '#000000';
