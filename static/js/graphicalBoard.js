@@ -12,6 +12,10 @@ var rightHalfMinXCoord = (boardWidth / 2) + (boardMiddle/ 2);
 // X coordinate where the left half ends
 var leftHalfMaxXCoord = (boardWidth / 2) - (boardMiddle/ 2);
 
+// Locally selected board/slot number (-1 means nothing is selected)
+var selectedBoard = -1;
+var selectedSlot = -1;
+
 function initGraphicalBoardEventHandlers()
 {
   var board0 = document.getElementById('board0');
@@ -87,7 +91,7 @@ function getCoordinatesFromSlot(slot)
       }
 
       ret.y1 = boardHeight / 2;
-      ret.y1 = boardHeight;
+      ret.y2 = boardHeight;
    } else if (slot == pieceState.HIT) {
       // bouding box of the middle section
       ret.x1 = leftHalfMaxXCoord;
@@ -222,16 +226,34 @@ function gameStateToDisplay()
           }
         }
       }
+
+      // bounding box around selected slot
+      if (selectedSlot >= 0) {
+         if (selectedBoard == i) {
+            context.fillStyle = '#ff0000';
+            var coords = getCoordinatesFromSlot(selectedSlot);
+            context.strokeRect(coords.x1, coords.y1,
+                               coords.x2 - coords.x1, coords.y2 - coords.y1);
+         }
+      }
     }
   }
 }
 
 function mouseDownListenerZero(e)
 {
+  alert("Click coordinates: (" + e.offsetX + ", " + e.offsetY + ") in slot " +
+        getSlotFromCoordinates(e.offsetX, e.offsetY));
+  selectedBoard = 0;
+  selectedSlot = getSlotFromCoordinates(e.offsetX, e.offsetY);
   gameStateToDisplay();
 }
 
 function mouseDownListenerOne(e)
 {
+  alert("Click coordinates: (" + e.offsetX + ", " + e.offsetY + ") in slot " +
+        getSlotFromCoordinates(e.offsetX, e.offsetY));
+  selectedBoard = 1;
+  selectedSlot = getSlotFromCoordinates(e.offsetX, e.offsetY);
   gameStateToDisplay();
 }
