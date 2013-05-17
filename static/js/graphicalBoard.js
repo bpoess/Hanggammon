@@ -9,6 +9,11 @@ var boardMiddleMargin = boardMiddle / 2;
 var boardWidth = triangleBase * 12 + boardMiddle;
 var boardHeight = triangleBase * 14;
 
+// X coordinate where the right half begins
+var rightHalfMinXCoord = (boardWidth / 2) + (boardMiddleMargin / 2);
+// X coordinate where the left half ends
+var leftHalfMaxXCoord = (boardWidth / 2) - (boardMiddleMargin / 2);
+
 function initGraphicalBoardEventHandlers()
 {
   var board0 = document.getElementById('board0');
@@ -36,11 +41,6 @@ function makeZeroFilledIntArray(length)
  */
 function getSlotFromCoordinates(x, y)
 {
-   // X coordinate where the right half begins
-   var rightHalfMinXCoord = (boardWidth / 2) + (boardMiddleMargin / 2);
-   // X coordinate where the left half ends
-   var leftHalfMaxXCoord = (boardWidth / 2) - (boardMiddleMargin / 2);
-
    if (x > rightHalfMinXCoord) { // Right half
       if (y >= (boardHeight / 2)) { // Top side
          // 6, 7, 8, 9, 10, 11
@@ -61,6 +61,47 @@ function getSlotFromCoordinates(x, y)
 
    // Click is on the middle margin, select the HIT pieces
    return pieceState.HIT;
+}
+
+/*
+ * Given a slot number, get the (x1,y1,x2,y2) coordinates of the bounding box
+ * for the slot.
+ */
+function getCoordinatesFromSlot(slot)
+{
+   var ret = {x1: -1, y1: -1, x2: -1, y2: -1};
+
+   if (slot < 12) { // top side
+      if (slot < 6) { // left side
+         ret.x1 = piece * slot;
+         ret.x2 = piece * (slot + 1);
+      } else { // right side
+         ret.x1 = rightHalfMinXCoord + piece * slot;
+         ret.x2 = rightHalfMinXCoord + piece * (slot + 1);
+      }
+
+      ret.y1 = boardHeight / 2;
+      ret.y1 = boardHeight;
+   } else if (slot < 24) { // bottom side
+      if (slot > 17) { // left side
+         ret.x1 = piece * (23 - slot);
+         ret.x2 = piece * (23 - slot + 1);
+      } else { // right side
+         ret.x1 = rightHalfMinXCoord + piece * (17 - slot);
+         ret.x2 = rightHalfMinXCoord + piece * (17 - slot + 1);
+      }
+
+      ret.y1 = 0;
+      ret.y2 = boardHeight / 2;
+   } else if (slot == pieceState.HIT) {
+      // bouding box of the middle section
+      ret.x1 = leftHalfMaxXCoord;
+      ret.x2 = rightHalfMinXCoord;
+      ret.y1 = 0;
+      ret.y2 = boardHeight;
+   }
+
+   return ret;
 }
 
 function gameStateToDisplay()
