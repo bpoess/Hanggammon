@@ -64,13 +64,7 @@ The following is for drawing SVG inside of an HTML5 canvas
 
 
 <p>
-   <form name="moveForm">
-      Team:       <input type="text" name="moveTeamText" value="0"><br>
-      From board: <input type="text" name="moveBoardText" value="0"><br>
-      From slot:  <input type="text" name="moveFromSlotText" value="0"><br>
-      To slot:    <input type="text" name="moveToSlotText" value="3"><br>
-      <input class="button" type="button" value="Move piece!" id="movePieceButton"
-       onClick="movePieceTest()"/>
+   <form name="rollForm">
       <input class="button" type="button" value="Roll 'em" id="rollDiceButton"
        onClick="rollDiceTest()"/>
    </form>
@@ -118,14 +112,6 @@ The following is for drawing SVG inside of an HTML5 canvas
 </style>
 <div class="scroll" id="historyDiv"></div>
 <script>
-
-function movePieceTest()
-{
-   movePiece(document.moveForm.moveBoardText.value,
-             document.moveForm.moveTeamText.value,
-             document.moveForm.moveFromSlotText.value,
-             document.moveForm.moveToSlotText.value);
-}
 
 function rollDiceTest()
 {
