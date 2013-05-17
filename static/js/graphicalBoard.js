@@ -37,18 +37,18 @@ function makeZeroFilledIntArray(length)
 function getSlotFromCoordinates(x, y)
 {
    if (x > rightHalfMinXCoord) { // Right half
-      if (y >= (boardHeight / 2)) { // Top side
+      if (y < (boardHeight / 2)) { // Top side
          // 6, 7, 8, 9, 10, 11
          return 6 + ((x - rightHalfMinXCoord) / (piece * 6));
-      } else if (y < (boardHeight / 2)) { // Bottom side
+      } else if (y >= (boardHeight / 2)) { // Bottom side
          // 17, 16, 15, 14, 13, 12
          return 12 + 5 - ((x - rightHalfMinXCoord) / (piece * 6));
       }
    } else if (x < leftHalfMaxXCoord) { // Left half
-      if (y >= (boardHeight / 2)) { // Top side
+      if (y < (boardHeight / 2)) { // Top side
          // 0, 1, 2, 3, 4, 5
          return (x / (piece * 6));
-      } else if (y < (boardHeight / 2)) { // Bottom side
+      } else if (y >= (boardHeight / 2)) { // Bottom side
          // 23, 22, 21, 20, 19, 18
          return 18 + 5 - (x / (piece * 6));
       }
@@ -75,8 +75,8 @@ function getCoordinatesFromSlot(slot)
          ret.x2 = rightHalfMinXCoord + piece * (slot + 1);
       }
 
-      ret.y1 = boardHeight / 2;
-      ret.y1 = boardHeight;
+      ret.y1 = 0;
+      ret.y2 = boardHeight / 2;
    } else if (slot < 24) { // bottom side
       if (slot > 17) { // left side
          ret.x1 = piece * (23 - slot);
@@ -86,8 +86,8 @@ function getCoordinatesFromSlot(slot)
          ret.x2 = rightHalfMinXCoord + piece * (17 - slot + 1);
       }
 
-      ret.y1 = 0;
-      ret.y2 = boardHeight / 2;
+      ret.y1 = boardHeight / 2;
+      ret.y1 = boardHeight;
    } else if (slot == pieceState.HIT) {
       // bouding box of the middle section
       ret.x1 = leftHalfMaxXCoord;
