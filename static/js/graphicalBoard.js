@@ -39,18 +39,18 @@ function getSlotFromCoordinates(x, y)
    if (x > rightHalfMinXCoord) { // Right half
       if (y < (boardHeight / 2)) { // Top side
          // 6, 7, 8, 9, 10, 11
-         return 6 + ((x - rightHalfMinXCoord) / piece);
+         return 6 + Math.floor((x - rightHalfMinXCoord) / piece);
       } else if (y >= (boardHeight / 2)) { // Bottom side
          // 17, 16, 15, 14, 13, 12
-         return 12 + 5 - ((x - rightHalfMinXCoord) / piece);
+         return 12 + 5 - Math.floor((x - rightHalfMinXCoord) / piece);
       }
    } else if (x < leftHalfMaxXCoord) { // Left half
       if (y < (boardHeight / 2)) { // Top side
          // 0, 1, 2, 3, 4, 5
-         return (x / piece);
+         return Math.floor(x / piece);
       } else if (y >= (boardHeight / 2)) { // Bottom side
          // 23, 22, 21, 20, 19, 18
-         return 18 + 5 - (x / piece);
+         return 18 + 5 - Math.floor(x / piece);
       }
    }
 
