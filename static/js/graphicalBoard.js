@@ -8,9 +8,9 @@ var boardWidth = triangleBase * 12 + boardMiddle;
 var boardHeight = triangleBase * 14;
 
 // X coordinate where the right half begins
-var rightHalfMinXCoord = (boardWidth / 2) + (boardMiddleMargin / 2);
+var rightHalfMinXCoord = (boardWidth / 2) + (boardMiddle/ 2);
 // X coordinate where the left half ends
-var leftHalfMaxXCoord = (boardWidth / 2) - (boardMiddleMargin / 2);
+var leftHalfMaxXCoord = (boardWidth / 2) - (boardMiddle/ 2);
 
 function initGraphicalBoardEventHandlers()
 {
