@@ -1,5 +1,14 @@
 var boardClicked = [];
 
+// This is the main configurable option... All other sizes based on the piece size.
+var piece = 20;
+
+var triangleBase = piece + 1;
+var boardMiddle = triangleBase + 2;
+var boardMiddleMargin = boardMiddle / 2;
+var boardWidth = triangleBase * 12 + boardMiddle;
+var boardHeight = triangleBase * 14;
+
 function initGraphicalBoardEventHandlers()
 {
   var board0 = document.getElementById('board0');
@@ -21,16 +30,41 @@ function makeZeroFilledIntArray(length)
   return arr; 
 }
 
+/*
+ * Given (x,y) coordinates, map it to a slot. We divide each half of the
+ * board to 12 sections (6 on top and 6 in the bottom)
+ */
+function getSlotFromCoordinates(x, y)
+{
+   // X coordinate where the right half begins
+   var rightHalfMinXCoord = (boardWidth / 2) + (boardMiddleMargin / 2);
+   // X coordinate where the left half ends
+   var leftHalfMaxXCoord = (boardWidth / 2) - (boardMiddleMargin / 2);
+
+   if (x > rightHalfMinXCoord) { // Right half
+      if (y >= (boardHeight / 2)) { // Top side
+         // 6, 7, 8, 9, 10, 11
+         return 6 + ((x - rightHalfMinXCoord) / (piece * 6));
+      } else if (y < (boardHeight / 2)) { // Bottom side
+         // 17, 16, 15, 14, 13, 12
+         return 12 + 5 - ((x - rightHalfMinXCoord) / (piece * 6));
+      }
+   } else if (x < leftHalfMaxXCoord) { // Left half
+      if (y >= (boardHeight / 2)) { // Top side
+         // 0, 1, 2, 3, 4, 5
+         return (x / (piece * 6));
+      } else if (y < (boardHeight / 2)) { // Bottom side
+         // 23, 22, 21, 20, 19, 18
+         return 18 + 5 - (x / (piece * 6));
+      }
+   }
+
+   // Click is on the middle margin, select the HIT pieces
+   return pieceState.HIT;
+}
+
 function gameStateToDisplay()
 {
-  // This is the main configurable option... All other sizes based on the piece size.
-  var piece = 20;
-
-  var triangleBase = piece + 1;
-  var boardMiddle = triangleBase + 2;
-  var boardMiddleMargin = boardMiddle / 2;
-  var boardWidth = triangleBase * 12 + boardMiddle;
-  var boardHeight = triangleBase * 14;
 
   var boards = new Array();
   boards[0] = document.getElementById('board0');
