@@ -86,8 +86,8 @@ function getCoordinatesFromSlot(slot)
          ret.x1 = triangleBase * (23 - slot);
          ret.x2 = triangleBase * (23 - slot + 1);
       } else { // right side
-         ret.x1 = rightHalfMinXCoord + triangleBase * (11 - slot);
-         ret.x2 = rightHalfMinXCoord + triangleBase * (11 - slot + 1);
+         ret.x1 = rightHalfMinXCoord + triangleBase * (17 - slot);
+         ret.x2 = rightHalfMinXCoord + triangleBase * (17 - slot + 1);
       }
 
       ret.y1 = boardHeight / 2;
