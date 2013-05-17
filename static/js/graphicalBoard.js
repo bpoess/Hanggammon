@@ -43,18 +43,18 @@ function getSlotFromCoordinates(x, y)
    if (x > rightHalfMinXCoord) { // Right half
       if (y < (boardHeight / 2)) { // Top side
          // 6, 7, 8, 9, 10, 11
-         return 6 + Math.floor((x - rightHalfMinXCoord) / piece);
+         return 6 + Math.floor((x - rightHalfMinXCoord) / triangleBase);
       } else if (y >= (boardHeight / 2)) { // Bottom side
          // 17, 16, 15, 14, 13, 12
-         return 12 + 5 - Math.floor((x - rightHalfMinXCoord) / piece);
+         return 12 + 5 - Math.floor((x - rightHalfMinXCoord) / triangleBase);
       }
    } else if (x < leftHalfMaxXCoord) { // Left half
       if (y < (boardHeight / 2)) { // Top side
          // 0, 1, 2, 3, 4, 5
-         return Math.floor(x / piece);
+         return Math.floor(x / triangleBase);
       } else if (y >= (boardHeight / 2)) { // Bottom side
          // 23, 22, 21, 20, 19, 18
-         return 18 + 5 - Math.floor(x / piece);
+         return 18 + 5 - Math.floor(x / triangleBase);
       }
    }
 
@@ -72,22 +72,22 @@ function getCoordinatesFromSlot(slot)
 
    if (slot < 12) { // top side
       if (slot < 6) { // left side
-         ret.x1 = piece * slot;
-         ret.x2 = piece * (slot + 1);
+         ret.x1 = triangleBase* slot;
+         ret.x2 = triangleBase * (slot + 1);
       } else { // right side
-         ret.x1 = rightHalfMinXCoord + piece * slot;
-         ret.x2 = rightHalfMinXCoord + piece * (slot + 1);
+         ret.x1 = rightHalfMinXCoord + triangleBase * slot;
+         ret.x2 = rightHalfMinXCoord + triangleBase * (slot + 1);
       }
 
       ret.y1 = 0;
       ret.y2 = boardHeight / 2;
    } else if (slot < 24) { // bottom side
       if (slot > 17) { // left side
-         ret.x1 = piece * (23 - slot);
-         ret.x2 = piece * (23 - slot + 1);
+         ret.x1 = triangleBase * (23 - slot);
+         ret.x2 = triangleBase * (23 - slot + 1);
       } else { // right side
-         ret.x1 = rightHalfMinXCoord + piece * (17 - slot);
-         ret.x2 = rightHalfMinXCoord + piece * (17 - slot + 1);
+         ret.x1 = rightHalfMinXCoord + triangleBase * (17 - slot);
+         ret.x2 = rightHalfMinXCoord + triangleBase * (17 - slot + 1);
       }
 
       ret.y1 = boardHeight / 2;
@@ -242,8 +242,6 @@ function gameStateToDisplay()
 
 function mouseDownListenerZero(e)
 {
-  alert("Click coordinates: (" + e.offsetX + ", " + e.offsetY + ") in slot " +
-        getSlotFromCoordinates(e.offsetX, e.offsetY));
   selectedBoard = 0;
   selectedSlot = getSlotFromCoordinates(e.offsetX, e.offsetY);
   gameStateToDisplay();
@@ -251,8 +249,6 @@ function mouseDownListenerZero(e)
 
 function mouseDownListenerOne(e)
 {
-  alert("Click coordinates: (" + e.offsetX + ", " + e.offsetY + ") in slot " +
-        getSlotFromCoordinates(e.offsetX, e.offsetY));
   selectedBoard = 1;
   selectedSlot = getSlotFromCoordinates(e.offsetX, e.offsetY);
   gameStateToDisplay();
