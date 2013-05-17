@@ -230,7 +230,7 @@ function gameStateToDisplay()
       // bounding box around selected slot
       if (selectedSlot >= 0) {
          if (selectedBoard == i) {
-            context.fillStyle = '#ff0000';
+            context.strokeStyle = '#ff0000';
             var coords = getCoordinatesFromSlot(selectedSlot);
             context.strokeRect(coords.x1, coords.y1,
                                coords.x2 - coords.x1, coords.y2 - coords.y1);
@@ -240,16 +240,66 @@ function gameStateToDisplay()
   }
 }
 
+// Returns true if the game state change requires a redraw
+function handleSelectedSlot(boardId, newSlot)
+{
+   if (newSlot == selectedSlot) {
+      if (selectedBoard == boardId) { // this board was already selected
+         // Same slot selected, clear selections
+         selectedBoard = -1;
+         selectedSlot = -1;
+         return true;
+      } else { // other board was selected, switch to this board
+         selectedBoard = boardId;
+         return true;
+      }
+   } else { // different slot selected
+      if (selectedBoard == boardId) { // this board was already selected
+         if (selectedSlot == -1) { // First time selection
+            selectedBoard = boardId;
+            selectedSlot = newSlot;
+            return true;
+         } else { // movement!
+            /*
+             * XXX: this is super lame - try moving for both teams. This needs
+             *      to be fixed when we know the current player's teamId
+             */
+            movePiece(boardId.toString(), "0", selectedSlot.toString(),
+                      newSlot.toString());
+            movePiece(boardId.toString(), "1", selectedSlot.toString(),
+                      newSlot.toString());
+
+            // Clear selections
+            selectedBoard = -1;
+            selectedSlot = -1;
+
+            // No need for redraw, game state update from server will trigger it
+            return false;
+         }
+      } else { // other board was selected, switch to this board
+         selectedBoard = boardId;
+         selectedSlot = newSlot;
+         return true;
+      }
+   }
+
+   return false;
+}
+
 function mouseDownListenerZero(e)
 {
-  selectedBoard = 0;
-  selectedSlot = getSlotFromCoordinates(e.offsetX, e.offsetY);
-  gameStateToDisplay();
+   var newSlot = getSlotFromCoordinates(e.offsetX, e.offsetY);
+
+   if (handleSelectedSlot(0, newSlot)) {
+      gameStateToDisplay();
+   }
 }
 
 function mouseDownListenerOne(e)
 {
-  selectedBoard = 1;
-  selectedSlot = getSlotFromCoordinates(e.offsetX, e.offsetY);
-  gameStateToDisplay();
+   var newSlot = getSlotFromCoordinates(e.offsetX, e.offsetY);
+
+   if (handleSelectedSlot(1, newSlot)) {
+      gameStateToDisplay();
+   }
 }
