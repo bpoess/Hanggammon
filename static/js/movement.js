@@ -22,18 +22,21 @@ function movePiece(boardId, teamId, fromSlot, toSlot)
 
    /*
     * Auto hit detection. Count the number of opposing pieces in toSlot
-    * and if there's only one hit it.
+    * and if there's only one hit it. We don't do this for the HIT and
+    * PICKED_UP states.
     */
    var opposingTeam = 1 - parseInt(teamId);
    var numOpposingPieces = 0;
    var pieceToHit = -1;
-   for (var opposingPiece = 0; opposingPiece < numPiecesPerBoard;
-        opposingPiece++) {
-      state = gameState[getPieceKeyOnBoard(boardId, opposingTeam,
-                                           opposingPiece)];
-      if (state === toSlot) {
-         numOpposingPieces++;
-         pieceToHit = opposingPiece;
+   if (toSlot != pieceState.HIT && toSlot != pieceState.PICKED_UP) {
+      for (var opposingPiece = 0; opposingPiece < numPiecesPerBoard;
+           opposingPiece++) {
+         state = gameState[getPieceKeyOnBoard(boardId, opposingTeam,
+                                              opposingPiece)];
+         if (state === toSlot) {
+            numOpposingPieces++;
+            pieceToHit = opposingPiece;
+         }
       }
    }
 
