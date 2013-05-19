@@ -10,9 +10,11 @@ var boardHeight = triangleBase * 14;
 // X coordinate where the left half begins
 var leftHalfMinXCoord = piece;
 // X coordinate where the left half ends
-var leftHalfMaxXCoord = leftHalfMinXCoord + (boardWidth / 2) - (boardMiddle/ 2);
+var leftHalfMaxXCoord = leftHalfMinXCoord + (boardWidth / 2) - (boardMiddle / 2);
 // X coordinate where the right half begins
-var rightHalfMinXCoord = leftHalfMinXCoord + (boardWidth / 2) + (boardMiddle/ 2);
+var rightHalfMinXCoord = leftHalfMaxXCoord + boardMiddle;
+// X coordinate where the right half ends
+var rightHalfMaxXCoord = rightHalfMinXCoord + (boardWidth / 2) - (boardMiddle / 2);
 
 // Locally selected board/slot number (-1 means nothing is selected)
 var selectedBoard = -1;
@@ -42,7 +44,7 @@ function makeZeroFilledIntArray(length)
  */
 function getSlotFromCoordinates(x, y)
 {
-   if (x > rightHalfMinXCoord) { // Right half
+   if (x > rightHalfMinXCoord && x < rightHalfMaxXCoord) { // Right half
       if (y < (boardHeight / 2)) { // Top side
          // 6, 7, 8, 9, 10, 11
          return 6 + Math.floor((x - rightHalfMinXCoord) / triangleBase);
@@ -50,7 +52,7 @@ function getSlotFromCoordinates(x, y)
          // 17, 16, 15, 14, 13, 12
          return 12 + 5 - Math.floor((x - rightHalfMinXCoord) / triangleBase);
       }
-   } else if (x < leftHalfMaxXCoord) { // Left half
+   } else if (x > leftHalfMinXCoord && x < leftHalfMaxXCoord) { // Left half
       if (y < (boardHeight / 2)) { // Top side
          // 0, 1, 2, 3, 4, 5
          return Math.floor((x - leftHalfMinXCoord) / triangleBase);
@@ -60,49 +62,71 @@ function getSlotFromCoordinates(x, y)
       }
    }
 
-   // Click is on the middle margin, select the HIT pieces
-   return pieceState.HIT;
+   if (x > leftHalfMaxXCoord && x < rightHalfMinXCoord) {
+      // Click is on the middle margin, select the HIT pieces
+      return pieceState.HIT;
+   }
+
+   // Outside margins, pieces that are picked up
+   return pieceState.PICKED_UP;
 }
 
 /*
- * Given a slot number, get the (x1,y1,x2,y2) coordinates of the bounding box
- * for the slot.
+ * Given a slot number, get the (x1,y1,x2,y2) coordinates of the bounding box(es)
+ * for the slot. Most slots have a single bounding box, whereas PICKED_UP has
+ * two.
  */
 function getCoordinatesFromSlot(slot)
 {
-   var ret = {x1: -1, y1: -1, x2: -1, y2: -1};
+   var retArr = [];
+   var ret1 = {x1: -1, y1: -1, x2: -1, y2: -1};
+   retArr.push(ret1);
 
    if (slot < 12) { // top side
       if (slot < 6) { // left side
-         ret.x1 = leftHalfMinXCoord + triangleBase * slot;
-         ret.x2 = leftHalfMinXCoord + triangleBase * (slot + 1);
+         ret1.x1 = leftHalfMinXCoord + triangleBase * slot;
+         ret1.x2 = leftHalfMinXCoord + triangleBase * (slot + 1);
       } else { // right side
-         ret.x1 = rightHalfMinXCoord + triangleBase * (slot - 6);
-         ret.x2 = rightHalfMinXCoord + triangleBase * (slot - 6 + 1);
+         ret1.x1 = rightHalfMinXCoord + triangleBase * (slot - 6);
+         ret1.x2 = rightHalfMinXCoord + triangleBase * (slot - 6 + 1);
       }
 
-      ret.y1 = 0;
-      ret.y2 = boardHeight / 2;
+      ret1.y1 = 0;
+      ret1.y2 = boardHeight / 2;
    } else if (slot < 24) { // bottom side
       if (slot > 17) { // left side
-         ret.x1 = leftHalfMinXCoord + triangleBase * (23 - slot);
-         ret.x2 = leftHalfMinXCoord + triangleBase * (23 - slot + 1);
+         ret1.x1 = leftHalfMinXCoord + triangleBase * (23 - slot);
+         ret1.x2 = leftHalfMinXCoord + triangleBase * (23 - slot + 1);
       } else { // right side
-         ret.x1 = rightHalfMinXCoord + triangleBase * (17 - slot);
-         ret.x2 = rightHalfMinXCoord + triangleBase * (17 - slot + 1);
+         ret1.x1 = rightHalfMinXCoord + triangleBase * (17 - slot);
+         ret1.x2 = rightHalfMinXCoord + triangleBase * (17 - slot + 1);
       }
 
-      ret.y1 = boardHeight / 2;
-      ret.y2 = boardHeight;
+      ret1.y1 = boardHeight / 2;
+      ret1.y2 = boardHeight;
    } else if (slot == pieceState.HIT) {
       // bouding box of the middle section
-      ret.x1 = leftHalfMaxXCoord;
-      ret.x2 = rightHalfMinXCoord;
-      ret.y1 = 0;
-      ret.y2 = boardHeight;
+      ret1.x1 = leftHalfMaxXCoord;
+      ret1.x2 = rightHalfMinXCoord;
+      ret1.y1 = 0;
+      ret1.y2 = boardHeight;
+   } else if (slot == pieceState.PICKED_UP) {
+      // bounding box of the left collection area
+      ret1.x1 = 0;
+      ret1.x2 = leftHalfMinXCoord;
+      ret1.y1 = 0;
+      ret1.y2 = boardHeight;
+
+      // bounding box of the right collection area
+      var ret2 = {x1: -1, y1: -1, x2: -1, y2: -1};
+      ret2.x1 = rightHalfMaxXCoord;
+      ret2.x2 = rightHalfMaxXCoord + piece;
+      ret2.y1 = 0;
+      ret2.y2 = boardHeight;
+      retArr.push(ret2);
    }
 
-   return ret;
+   return retArr;
 }
 
 function drawPiece(context, middleX, middleY)
@@ -198,7 +222,7 @@ function gameStateToDisplay()
                           boardMiddle - boardMiddleMargin,
                           boardHeight);
 
-         var numPiecesPerSlot = makeZeroFilledIntArray(26);
+         var numPiecesPerSlot = makeZeroFilledIntArray(pieceState.NUM_STATES);
 
          // draw pieces
          for (var j = 0; j < 2; j++) {
@@ -225,27 +249,41 @@ function gameStateToDisplay()
                                leftHalfMinXCoord + piece * (remapped + .5) + middleOffset + remapped,
                                boardHeight - piece * (numPiecesPerSlot[stateInt] + .5));
                      numPiecesPerSlot[stateInt]++;
-                  } else if (stateInt === pieceState.MOVING) {
-
                   } else if (stateInt === pieceState.HIT) {
                      drawPiece(context,
                                leftHalfMinXCoord + boardWidth / 2,
                                (boardHeight / 2) + piece * numPiecesPerSlot[stateInt]);
                      numPiecesPerSlot[stateInt]++;
                   } else if (stateInt === pieceState.PICKED_UP) {
-
+                     if (j === 0) {
+                        // left team
+                        drawPiece(context,
+                                  piece * .5,
+                                  piece * (numPiecesPerSlot[stateInt] + .5));
+                        numPiecesPerSlot[stateInt]++;
+                     } else {
+                        // right team
+                        drawPiece(context,
+                                  rightHalfMaxXCoord + piece * .5,
+                                  piece * (numPiecesPerSlot[stateInt] + .5));
+                        numPiecesPerSlot[stateInt]++;
+                     }
                   }
                }
             }
          }
 
-         // bounding box around selected slot
+         // bounding box around selected slot(s)
          if (selectedSlot >= 0) {
             if (selectedBoard == i) {
                context.strokeStyle = '#ff0000';
                var coords = getCoordinatesFromSlot(selectedSlot);
-               context.strokeRect(coords.x1, coords.y1,
-                                  coords.x2 - coords.x1, coords.y2 - coords.y1);
+               for (var j = 0; j < coords.length; j++) {
+                  context.strokeRect(coords[j].x1,
+                                     coords[j].y1,
+                                     coords[j].x2 - coords[j].x1,
+                                     coords[j].y2 - coords[j].y1);
+               }
             }
          }
       }

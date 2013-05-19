@@ -36,9 +36,9 @@ pieceState = {
    IN_SLOT_21 : 21,
    IN_SLOT_22 : 22,
    IN_SLOT_23 : 23,
-   MOVING     : 24,
-   HIT        : 25,
-   PICKED_UP  : 26
+   HIT        : 24,
+   PICKED_UP  : 25,
+   NUM_STATES : 26
 }
 
 // Return the state key for a piece on the given board with the given team
