@@ -112,6 +112,25 @@ function drawPiece(context, middleX, middleY)
    context.closePath();
 }
 
+function drawTriangle(context, baseX, baseY, upwards)
+{
+   context.beginPath();
+
+   context.moveTo(baseX, baseY);
+   context.lineTo(baseX + piece, baseY);
+   if (upwards == true) {
+      context.lineTo(baseX + piece / 2, baseY - piece * 5);
+   } else {
+      context.lineTo(baseX + piece / 2, baseY + piece * 5);
+   }
+   context.lineTo(baseX, baseY);
+
+   context.fill();
+   context.stroke();
+
+   context.closePath();
+}
+
 function gameStateToDisplay()
 {
    var boards = new Array();
@@ -143,17 +162,10 @@ function gameStateToDisplay()
             // middle of board offset
             var middleOffset = Math.floor(j / 6) * boardMiddle;
 
-            context.beginPath();
-
-            context.moveTo(piece * j + middleOffset + j, 0);
-            context.lineTo(piece * (j + 1) + middleOffset + j, 0);
-            context.lineTo(piece * j + piece / 2 + middleOffset + j, piece * 5);
-            context.lineTo(piece * j + middleOffset + j, 0);
-
-            context.fill();
-            context.stroke();
-
-            context.closePath();
+            drawTriangle(context,
+                         piece * j + middleOffset + j, // baseX
+                         0,                            // baseY
+                         false);                       // downwards
          }
 
          // bottom triangles
@@ -169,18 +181,10 @@ function gameStateToDisplay()
             // middle of board offset
             var middleOffset = Math.floor(j / 6) * boardMiddle;
 
-            context.beginPath();
-
-            context.moveTo(piece * j + middleOffset + j, boardHeight);
-            context.lineTo(piece * (j + 1) + middleOffset + j, boardHeight);
-            context.lineTo(piece * j + piece / 2 + middleOffset + j,
-                           boardHeight - piece * 5);
-            context.lineTo(piece * j + middleOffset + j, boardHeight);
-
-            context.fill();
-            context.stroke();
-
-            context.closePath();
+            drawTriangle(context,
+                         piece * j + middleOffset + j, // baseX
+                         boardHeight,                  // baseY
+                         true);                        // upwards
          }
 
          // middle
