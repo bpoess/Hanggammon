@@ -103,6 +103,15 @@ function getCoordinatesFromSlot(slot)
    return ret;
 }
 
+function drawPiece(context, middleX, middleY)
+{
+   context.beginPath();
+   context.arc(middleX, middleY, piece * .5, 0, 2 * Math.PI, false);
+   context.fill();
+   context.stroke();
+   context.closePath();
+}
+
 function gameStateToDisplay()
 {
    var boards = new Array();
@@ -195,35 +204,23 @@ function gameStateToDisplay()
                   var stateInt = parseInt(stateString);
                   if (stateInt <= 11) { // one side of board
                      var middleOffset = Math.floor(stateInt / 6) * boardMiddle;
-                     context.beginPath();
-                     context.arc(piece * (stateInt + .5) + middleOffset + stateInt,
-                                 piece * (numPiecesPerSlot[stateInt] + .5),
-                                 piece * .5, 0, 2 * Math.PI, false);
-                     context.fill();
-                     context.stroke();
-                     context.closePath();
+                     drawPiece(context,
+                               piece * (stateInt + .5) + middleOffset + stateInt,
+                               piece * (numPiecesPerSlot[stateInt] + .5));
                      numPiecesPerSlot[stateInt]++;
                   } else if (stateInt <= 23) { // other side of board
                      var remapped = Math.abs(stateInt - 23)
                         var middleOffset = Math.floor(remapped / 6) * boardMiddle;
-                     context.beginPath();
-                     context.arc(piece * (remapped + .5) + middleOffset + remapped,
-                                 boardHeight - piece * (numPiecesPerSlot[stateInt] + .5),
-                                 piece * .5, 0, 2 * Math.PI, false);
-                     context.fill();
-                     context.stroke();
-                     context.closePath();
+                     drawPiece(context,
+                               piece * (remapped + .5) + middleOffset + remapped,
+                               boardHeight - piece * (numPiecesPerSlot[stateInt] + .5));
                      numPiecesPerSlot[stateInt]++;
                   } else if (stateInt === pieceState.MOVING) {
 
                   } else if (stateInt === pieceState.HIT) {
-                     context.beginPath();
-                     context.arc(boardWidth / 2,
-                                 (boardHeight / 2) + piece * numPiecesPerSlot[stateInt],
-                                 piece * .5, 0, 2 * Math.PI, false);
-                     context.fill();
-                     context.stroke();
-                     context.closePath();
+                     drawPiece(context,
+                               boardWidth / 2,
+                               (boardHeight / 2) + piece * numPiecesPerSlot[stateInt]);
                      numPiecesPerSlot[stateInt]++;
                   } else if (stateInt === pieceState.PICKED_UP) {
 
