@@ -271,6 +271,9 @@ function gameStateToDisplay()
                   }
                }
             }
+
+            // reset PICKED_UP counter for the next team
+            numPiecesPerSlot[pieceState.PICKED_UP] = 0;
          }
 
          // bounding box around selected slot(s)
