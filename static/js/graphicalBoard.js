@@ -7,10 +7,12 @@ var boardMiddleMargin = boardMiddle / 2;
 var boardWidth = triangleBase * 12 + boardMiddle;
 var boardHeight = triangleBase * 14;
 
-// X coordinate where the right half begins
-var rightHalfMinXCoord = (boardWidth / 2) + (boardMiddle/ 2);
+// X coordinate where the left half begins
+var leftHalfMinXCoord = piece;
 // X coordinate where the left half ends
-var leftHalfMaxXCoord = (boardWidth / 2) - (boardMiddle/ 2);
+var leftHalfMaxXCoord = leftHalfMinXCoord + (boardWidth / 2) - (boardMiddle/ 2);
+// X coordinate where the right half begins
+var rightHalfMinXCoord = leftHalfMinXCoord + (boardWidth / 2) + (boardMiddle/ 2);
 
 // Locally selected board/slot number (-1 means nothing is selected)
 var selectedBoard = -1;
@@ -51,10 +53,10 @@ function getSlotFromCoordinates(x, y)
    } else if (x < leftHalfMaxXCoord) { // Left half
       if (y < (boardHeight / 2)) { // Top side
          // 0, 1, 2, 3, 4, 5
-         return Math.floor(x / triangleBase);
+         return Math.floor((x - leftHalfMinXCoord) / triangleBase);
       } else if (y >= (boardHeight / 2)) { // Bottom side
          // 23, 22, 21, 20, 19, 18
-         return 18 + 5 - Math.floor(x / triangleBase);
+         return 18 + 5 - Math.floor((x - leftHalfMinXCoord) / triangleBase);
       }
    }
 
@@ -72,8 +74,8 @@ function getCoordinatesFromSlot(slot)
 
    if (slot < 12) { // top side
       if (slot < 6) { // left side
-         ret.x1 = triangleBase* slot;
-         ret.x2 = triangleBase * (slot + 1);
+         ret.x1 = leftHalfMinXCoord + triangleBase * slot;
+         ret.x2 = leftHalfMinXCoord + triangleBase * (slot + 1);
       } else { // right side
          ret.x1 = rightHalfMinXCoord + triangleBase * (slot - 6);
          ret.x2 = rightHalfMinXCoord + triangleBase * (slot - 6 + 1);
@@ -83,8 +85,8 @@ function getCoordinatesFromSlot(slot)
       ret.y2 = boardHeight / 2;
    } else if (slot < 24) { // bottom side
       if (slot > 17) { // left side
-         ret.x1 = triangleBase * (23 - slot);
-         ret.x2 = triangleBase * (23 - slot + 1);
+         ret.x1 = leftHalfMinXCoord + triangleBase * (23 - slot);
+         ret.x2 = leftHalfMinXCoord + triangleBase * (23 - slot + 1);
       } else { // right side
          ret.x1 = rightHalfMinXCoord + triangleBase * (17 - slot);
          ret.x2 = rightHalfMinXCoord + triangleBase * (17 - slot + 1);
@@ -141,13 +143,15 @@ function gameStateToDisplay()
 
       var context = boards[i].getContext("2d");
       if (context) {
-         boards[i].width = boardWidth;
+         boards[i].width = boardWidth + 2 * piece; // leave "piece" on each side
          boards[i].height = boardHeight;
-         boards[i].setAttribute('style', 'border:1px solid #000000;');
 
          // Set the style properties.
          context.strokeStyle = '#000000';
          context.lineWidth = 1;
+
+         // Draw board borders
+         context.strokeRect(leftHalfMinXCoord, 0, boardWidth, boardHeight);
 
          // top triangles
          for (var j = 0; j < 12; j++) {
@@ -163,9 +167,9 @@ function gameStateToDisplay()
             var middleOffset = Math.floor(j / 6) * boardMiddle;
 
             drawTriangle(context,
-                         piece * j + middleOffset + j, // baseX
-                         0,                            // baseY
-                         false);                       // downwards
+                         leftHalfMinXCoord + piece * j + middleOffset + j, // baseX
+                         0,                                                // baseY
+                         false);                                           // downwards
          }
 
          // bottom triangles
@@ -182,15 +186,17 @@ function gameStateToDisplay()
             var middleOffset = Math.floor(j / 6) * boardMiddle;
 
             drawTriangle(context,
-                         piece * j + middleOffset + j, // baseX
-                         boardHeight,                  // baseY
-                         true);                        // upwards
+                         leftHalfMinXCoord + piece * j + middleOffset + j, // baseX
+                         boardHeight,                                      // baseY
+                         true);                                            // upwards
          }
 
          // middle
          context.fillStyle = '#000000';
-         context.fillRect(boardWidth / 2 - boardMiddle / 2 + boardMiddleMargin / 2,
-                          0, boardMiddle - boardMiddleMargin, boardHeight);
+         context.fillRect(leftHalfMinXCoord + boardWidth / 2 - boardMiddle / 2 + boardMiddleMargin / 2,
+                          0,
+                          boardMiddle - boardMiddleMargin,
+                          boardHeight);
 
          var numPiecesPerSlot = makeZeroFilledIntArray(26);
 
@@ -209,21 +215,21 @@ function gameStateToDisplay()
                   if (stateInt <= 11) { // one side of board
                      var middleOffset = Math.floor(stateInt / 6) * boardMiddle;
                      drawPiece(context,
-                               piece * (stateInt + .5) + middleOffset + stateInt,
+                               leftHalfMinXCoord + piece * (stateInt + .5) + middleOffset + stateInt,
                                piece * (numPiecesPerSlot[stateInt] + .5));
                      numPiecesPerSlot[stateInt]++;
                   } else if (stateInt <= 23) { // other side of board
                      var remapped = Math.abs(stateInt - 23)
                         var middleOffset = Math.floor(remapped / 6) * boardMiddle;
                      drawPiece(context,
-                               piece * (remapped + .5) + middleOffset + remapped,
+                               leftHalfMinXCoord + piece * (remapped + .5) + middleOffset + remapped,
                                boardHeight - piece * (numPiecesPerSlot[stateInt] + .5));
                      numPiecesPerSlot[stateInt]++;
                   } else if (stateInt === pieceState.MOVING) {
 
                   } else if (stateInt === pieceState.HIT) {
                      drawPiece(context,
-                               boardWidth / 2,
+                               leftHalfMinXCoord + boardWidth / 2,
                                (boardHeight / 2) + piece * numPiecesPerSlot[stateInt]);
                      numPiecesPerSlot[stateInt]++;
                   } else if (stateInt === pieceState.PICKED_UP) {
