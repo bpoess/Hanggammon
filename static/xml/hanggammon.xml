@@ -156,11 +156,11 @@ function updateDisplayState()
    
    var dice1 = document.getElementById('dice1');
    dice1.innerHTML = gapi.hangout.data.getValue("dice0_value");
-   canvg('die1', 'img/die1.svg')
+   //canvg('die1', '//hanggammon.appspot.com/img/die1.svg')
 
    var dice2 = document.getElementById('dice2');
    dice2.innerHTML = gapi.hangout.data.getValue("dice1_value");
-   canvg('die2', 'img/die2.svg')
+   //canvg('die2', '//hanggammon.appspot.com/img/die2.svg')
 }
 
 // Sync state update coming from the server
