@@ -16,6 +16,18 @@ function movePiece(boardId, teamId, fromSlot, toSlot)
       return;
    }
 
+   // Only let team X pieces to move to HIT_X and PICKED_UP_X
+   if (toSlot == pieceState.HIT_0 || toSlot == pieceState.PICKED_UP_0) {
+      if (teamId == 1) {
+         return;
+      }
+   }
+   if (toSlot == pieceState.HIT_1 || toSlot == pieceState.PICKED_UP_1) {
+      if (teamId == 0) {
+         return;
+      }
+   }
+
    // Queue update the move the piece to its new location
    queueStateUpdate(getPieceKeyOnBoard(boardId, teamId, parseInt(movePiece)),
                     toSlot);
