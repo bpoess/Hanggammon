@@ -22,13 +22,14 @@ function movePiece(boardId, teamId, fromSlot, toSlot)
 
    /*
     * Auto hit detection. Count the number of opposing pieces in toSlot
-    * and if there's only one hit it. We don't do this for the HIT and
-    * PICKED_UP states.
+    * and if there's only one hit it. We don't do this for the HIT* and
+    * PICKED_UP* states.
     */
    var opposingTeam = 1 - parseInt(teamId);
    var numOpposingPieces = 0;
    var pieceToHit = -1;
-   if (toSlot != pieceState.HIT && toSlot != pieceState.PICKED_UP) {
+   if (toSlot != pieceState.HIT_0 && toSlot != pieceState.HIT_1 &&
+       toSlot != pieceState.PICKED_UP_0 && toSlot != pieceState.PICKED_UP_1) {
       for (var opposingPiece = 0; opposingPiece < numPiecesPerBoard;
            opposingPiece++) {
          state = gameState[getPieceKeyOnBoard(boardId, opposingTeam,
@@ -42,9 +43,15 @@ function movePiece(boardId, teamId, fromSlot, toSlot)
 
    if (numOpposingPieces == 1) {
       // Hit the piece
-      queueStateUpdate(getPieceKeyOnBoard(boardId, opposingTeam,
-                                          parseInt(pieceToHit)),
-                       pieceState.HIT.toString());
+      if (opposingTeam === 0) {
+         queueStateUpdate(getPieceKeyOnBoard(boardId, opposingTeam,
+                                             parseInt(pieceToHit)),
+                          pieceState.HIT_0.toString());
+      } else {
+         queueStateUpdate(getPieceKeyOnBoard(boardId, opposingTeam,
+                                             parseInt(pieceToHit)),
+                          pieceState.HIT_1.toString());
+      }
    }
 
    // send state update to the server

@@ -64,11 +64,19 @@ function getSlotFromCoordinates(x, y)
 
    if (x > leftHalfMaxXCoord && x < rightHalfMinXCoord) {
       // Click is on the middle margin, select the HIT pieces
-      return pieceState.HIT;
+      if (y > boardHeight / 2) {
+         return pieceState.HIT_0;
+      } else {
+         return pieceState.HIT_1;
+      }
    }
 
    // Outside margins, pieces that are picked up
-   return pieceState.PICKED_UP;
+   if (x <= leftHalfMinXCoord) {
+      return pieceState.PICKED_UP_0;
+   } else if (x >= rightHalfMaxXCoord) {
+      return pieceState.PICKED_UP_1;
+   }
 }
 
 /*
@@ -104,26 +112,30 @@ function getCoordinatesFromSlot(slot)
 
       ret1.y1 = boardHeight / 2;
       ret1.y2 = boardHeight;
-   } else if (slot == pieceState.HIT) {
-      // bouding box of the middle section
+   } else if (slot == pieceState.HIT_0) {
+      // bouding box of the middle/bottom section
+      ret1.x1 = leftHalfMaxXCoord;
+      ret1.x2 = rightHalfMinXCoord;
+      ret1.y1 = boardHeight / 2;
+      ret1.y2 = boardHeight;
+   } else if (slot == pieceState.HIT_1) {
+      // bouding box of the middle/top section
       ret1.x1 = leftHalfMaxXCoord;
       ret1.x2 = rightHalfMinXCoord;
       ret1.y1 = 0;
-      ret1.y2 = boardHeight;
-   } else if (slot == pieceState.PICKED_UP) {
+      ret1.y2 = boardHeight / 2;
+   } else if (slot == pieceState.PICKED_UP_0) {
       // bounding box of the left collection area
       ret1.x1 = 0;
       ret1.x2 = leftHalfMinXCoord;
       ret1.y1 = 0;
       ret1.y2 = boardHeight;
-
+   } else if (slot == pieceState.PICKED_UP_1) {
       // bounding box of the right collection area
-      var ret2 = {x1: -1, y1: -1, x2: -1, y2: -1};
-      ret2.x1 = rightHalfMaxXCoord;
-      ret2.x2 = rightHalfMaxXCoord + piece;
-      ret2.y1 = 0;
-      ret2.y2 = boardHeight;
-      retArr.push(ret2);
+      ret1.x1 = rightHalfMaxXCoord;
+      ret1.x2 = rightHalfMaxXCoord + piece;
+      ret1.y1 = 0;
+      ret1.y2 = boardHeight;
    }
 
    return retArr;
@@ -249,31 +261,29 @@ function gameStateToDisplay()
                                leftHalfMinXCoord + piece * (remapped + .5) + middleOffset + remapped,
                                boardHeight - piece * (numPiecesPerSlot[stateInt] + .5));
                      numPiecesPerSlot[stateInt]++;
-                  } else if (stateInt === pieceState.HIT) {
+                  } else if (stateInt === pieceState.HIT_0) {
                      drawPiece(context,
                                leftHalfMinXCoord + boardWidth / 2,
-                               (boardHeight / 2) + piece * numPiecesPerSlot[stateInt]);
+                               (boardHeight / 2) + piece * (numPiecesPerSlot[stateInt] + 1));
                      numPiecesPerSlot[stateInt]++;
-                  } else if (stateInt === pieceState.PICKED_UP) {
-                     if (j === 0) {
-                        // left team
-                        drawPiece(context,
-                                  piece * .5,
-                                  piece * (numPiecesPerSlot[stateInt] + .5));
-                        numPiecesPerSlot[stateInt]++;
-                     } else {
-                        // right team
-                        drawPiece(context,
-                                  rightHalfMaxXCoord + piece * .5,
-                                  piece * (numPiecesPerSlot[stateInt] + .5));
-                        numPiecesPerSlot[stateInt]++;
-                     }
+                  } else if (stateInt === pieceState.HIT_1) {
+                     drawPiece(context,
+                               leftHalfMinXCoord + boardWidth / 2,
+                               (boardHeight / 2) - piece * (numPiecesPerSlot[stateInt] + 1));
+                     numPiecesPerSlot[stateInt]++;
+                  } else if (stateInt === pieceState.PICKED_UP_0) { // left team
+                     drawPiece(context,
+                               piece * .5,
+                               piece * (numPiecesPerSlot[stateInt] + .5));
+                     numPiecesPerSlot[stateInt]++;
+                  } else if (stateInt === pieceState.PICKED_UP_1) { // right team
+                     drawPiece(context,
+                               rightHalfMaxXCoord + piece * .5,
+                               piece * (numPiecesPerSlot[stateInt] + .5));
+                     numPiecesPerSlot[stateInt]++;
                   }
                }
             }
-
-            // reset PICKED_UP counter for the next team
-            numPiecesPerSlot[pieceState.PICKED_UP] = 0;
          }
 
          // bounding box around selected slot(s)
