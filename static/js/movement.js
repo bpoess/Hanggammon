@@ -70,10 +70,11 @@ function movePiece(boardId, teamId, fromSlot, toSlot)
    commitQueuedStateUpdates();
 
    if (numOpposingPieces == 1) {
-      history_add("board " + boardId + " team " + teamId + " from " + fromSlot +
-                  " to " + toSlot + " (HIT)");
+      history_add("board " + boardId + " team " + teamId + " from " +
+                  slotToString(fromSlot) + " to " + slotToString(toSlot) +
+                  " (HIT)");
    } else {
-      history_add("board " + boardId + " team " + teamId + " from " + fromSlot +
-                  " to " + toSlot);
+      history_add("board " + boardId + " team " + teamId + " from " +
+                  slotToString(fromSlot) + " to " + slotToString(toSlot));
    }
 }

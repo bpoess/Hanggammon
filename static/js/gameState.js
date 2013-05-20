@@ -43,6 +43,18 @@ pieceState = {
    NUM_STATES  : 28
 }
 
+// Return the string representation of a slot
+function slotToString(slotId)
+{
+   if (slotId <= pieceState.IN_SLOT_23) {
+      return slotId;
+   } else if (slotId <= pieceState.HIT_1) {
+      return "HIT";
+   } else if (slotId <= pieceState.PICKED_UP_1) {
+      return "PICKUP";
+   }
+}
+
 // Return the state key for a piece on the given board with the given team
 function getPieceKeyOnBoard(boardId, teamId, pieceId)
 {
