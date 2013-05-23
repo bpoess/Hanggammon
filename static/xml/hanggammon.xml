@@ -143,8 +143,7 @@ function onStateChange(changeEvent)
 
 function onMessageReceived(senderId, message)
 {
-   var histDiv = document.getElementById('historyDiv');
-   histDiv.innerHTML += message;
+  histdiv_add(message);
 }
 
 function init() {
@@ -157,7 +156,7 @@ function init() {
          if (eventObj.isApiReady) {
             gapi.hangout.data.onStateChanged.add(onStateChange);
 
-            gapu.hangout.data.onMessageReceived.add(onMessageReceived);
+            gapi.hangout.data.onMessageReceived.add(onMessageReceived);
 
             initGameState();
             updateDisplayState();

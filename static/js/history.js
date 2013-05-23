@@ -1,3 +1,11 @@
+function histdiv_add(msg)
+{
+   var histDiv = document.getElementById('historyDiv');
+   msg += histDiv.innerHTML;
+   histDiv.innerHTML = msg;
+}
+
+
 function history_add(msg)
 {
    // first part of history is the timestamp
@@ -27,8 +35,7 @@ function history_add(msg)
    // finally the actual message
    hist += " " + msg + "<br>";
 
-   var histDiv = document.getElementById('historyDiv');
-   histDiv.innerHTML += hist;
+   histdiv_add(hist);
 
    gapi.hangout.sendMessage(hist);
 }
