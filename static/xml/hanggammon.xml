@@ -80,12 +80,15 @@ The following is for drawing SVG inside of an HTML5 canvas
 <div id="started"></div>
 
 <canvas id="board0" style="float:left"></canvas>
-<form name="rollForm" style="float:left">
-   <input class="button" type="button" value="Roll 'em" id="rollDiceButton" style="float:left"
-    onClick="rollDiceTest()"/>
-</form>
-<span id="dice1"></span> 
-<span id="dice2"></span> 
+<div id="diceContainer" style="float:left">
+  <form name="rollForm">
+    <input class="button" type="button" value="Roll 'em" id="rollDiceButton" style="float:left" onClick="rollDiceTest()"/>
+  </form>
+  <div id="diceValues">
+    <span id="dice1"></span> 
+    <span id="dice2"></span> 
+  </div>
+</div>
 <canvas id="board1" style="float:left"></canvas>
 
 <style type="text/css">
