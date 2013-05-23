@@ -154,13 +154,13 @@ function updateDisplayState()
    //var stateDiv = document.getElementById('stateDiv');
    //stateDiv.innerHTML = gameStateToString();
 
-   var dice1 = document.getElementById('dice1');
-   dice1.innerHTML = gapi.hangout.data.getValue("dice0_value");
-   //canvg('die1', '//hanggammon.appspot.com/img/die1.svg')
+   var diceLeftValue = gapi.hangout.data.getValue("dice0_value");
+   var diceLeft = document.getElementById('dice1');
+   diceLeft.src = "//hanggammon.appspot.com/img/die" + diceLeftValue + ".png";
 
-   var dice2 = document.getElementById('dice2');
-   dice2.innerHTML = gapi.hangout.data.getValue("dice1_value");
-   //canvg('die2', '//hanggammon.appspot.com/img/die2.svg')
+   var diceRightValue = gapi.hangout.data.getValue("dice1_value");
+   var diceRight = document.getElementById('dice2');
+   diceRight.src = "//hanggammon.appspot.com/img/die" + diceRightValue + ".png";
 }
 
 function init() {
