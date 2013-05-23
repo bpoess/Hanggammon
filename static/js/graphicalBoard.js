@@ -8,7 +8,7 @@ var boardWidth = triangleBase * 12 + boardMiddle;
 var boardHeight = triangleBase * 15;
 
 // X coordinate where the left half begins
-var leftHalfMinXCoord = piece;
+var leftHalfMinXCoord = piece + 1;
 // X coordinate where the left half ends
 var leftHalfMaxXCoord = leftHalfMinXCoord + (boardWidth / 2) - (boardMiddle / 2);
 // X coordinate where the right half begins
@@ -179,7 +179,7 @@ function gameStateToDisplay()
 
       var context = boards[i].getContext("2d");
       if (context) {
-         boards[i].width = boardWidth + 2 * piece; // leave "piece" on each side
+         boards[i].width = boardWidth + 2 * piece + 2; // leave "piece + 1" on each side
          boards[i].height = boardHeight;
 
          // Set the style properties.
