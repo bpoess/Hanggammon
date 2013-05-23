@@ -37,5 +37,5 @@ function history_add(msg)
 
    histdiv_add(hist);
 
-   gapi.hangout.sendMessage(hist);
+   gapi.hangout.data.sendMessage(hist);
 }
