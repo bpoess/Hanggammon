@@ -79,16 +79,14 @@ The following is for drawing SVG inside of an HTML5 canvas
 <div id="stateDiv"></div>
 <div id="started"></div>
 
-<canvas id="board0"></canvas>
-<form name="rollForm">
-   <input class="button" type="button" value="Roll 'em" id="rollDiceButton"
+<canvas id="board0" style="float:left"></canvas>
+<form name="rollForm" style="float:left">
+   <input class="button" type="button" value="Roll 'em" id="rollDiceButton" style="float:left"
     onClick="rollDiceTest()"/>
 </form>
-<canvas id="die1" width="30px" height="30px"></canvas> 
-<canvas id="die2" width="30px" height="30px"></canvas> 
 <span id="dice1"></span> 
 <span id="dice2"></span> 
-<canvas id="board1"></canvas>
+<canvas id="board1" style="float:left"></canvas>
 
 <style type="text/css">
 .scroll{
