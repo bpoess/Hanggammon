@@ -64,10 +64,6 @@ The following is for drawing SVG inside of an HTML5 canvas
 
 
 <p>
-   <form name="rollForm">
-      <input class="button" type="button" value="Roll 'em" id="rollDiceButton"
-       onClick="rollDiceTest()"/>
-   </form>
    <form name="scoreForm">
       <input class="button" type="button" value="Team0 +1" id="team0IncButton"
        onClick="team0ScoreInc()" style="display:inline"/>
@@ -84,6 +80,10 @@ The following is for drawing SVG inside of an HTML5 canvas
 <div id="started"></div>
 
 <canvas id="board0"></canvas>
+<form name="rollForm">
+   <input class="button" type="button" value="Roll 'em" id="rollDiceButton"
+    onClick="rollDiceTest()"/>
+</form>
 <canvas id="die1" width="30px" height="30px"></canvas> 
 <canvas id="die2" width="30px" height="30px"></canvas> 
 <span id="dice1"></span> 
