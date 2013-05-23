@@ -5,7 +5,7 @@ var triangleBase = piece + 1;
 var boardMiddle = triangleBase + 2;
 var boardMiddleMargin = boardMiddle / 2;
 var boardWidth = triangleBase * 12 + boardMiddle;
-var boardHeight = triangleBase * 14;
+var boardHeight = triangleBase * 15;
 
 // X coordinate where the left half begins
 var leftHalfMinXCoord = piece;
