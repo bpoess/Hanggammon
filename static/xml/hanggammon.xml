@@ -48,13 +48,6 @@
 <script src="https://hanggammon.appspot.com/js/score.js"></script>
 <script src="https://hanggammon.appspot.com/js/seedrandom.js"></script>
 
-<!--
-The following is for drawing SVG inside of an HTML5 canvas
--->
-<script src="https://hanggammon.appspot.com/js/rgbcolor.js"></script>
-<script src="https://hanggammon.appspot.com/js/StackBlur.js"></script>
-<script src="https://hanggammon.appspot.com/js/canvg.js"></script>
-
 <h3>HangGammon</h3>
 
 <p>
