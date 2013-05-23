@@ -143,9 +143,9 @@ function onStateChange(changeEvent)
    updateDisplayState();
 }
 
-function onMessageReceived(senderId, message)
+function onMessageReceived(messageReceivedEvent)
 {
-  histdiv_add(message);
+  histdiv_add(messageReceivedEvent.message);
 }
 
 function updateDisplayState()
