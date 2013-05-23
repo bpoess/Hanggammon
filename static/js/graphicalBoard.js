@@ -1,5 +1,5 @@
 // This is the main configurable option... All other sizes based on the piece size.
-var piece = 20;
+var piece = 30;
 
 var triangleBase = piece + 1;
 var boardMiddle = triangleBase + 2;
