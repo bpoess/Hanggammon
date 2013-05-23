@@ -27,10 +27,8 @@ function history_add(msg)
    // finally the actual message
    hist += " " + msg + "<br>";
 
-   var hist_index_str = gapi.hangout.data.getValue("history_len");
-   hist_index = parseInt(hist_index_str)
-   hist_index += 1;
-   gapi.hangout.data.setValue("history_len", hist_index.toString());
-   var hist_current = gapi.hangout.data.getValue("history_" + ((hist_index - 1) % 10).toString());
-   gapi.hangout.data.setValue("history_" + ((hist_index - 1) % 10).toString(), hist);
+   var histDiv = document.getElementById('historyDiv');
+   histDiv.innerHTML += hist;
+
+   gapi.hangout.sendMessage(hist);
 }

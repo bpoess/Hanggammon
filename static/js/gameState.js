@@ -195,13 +195,8 @@ function resetGameState()
    initDiceState();
    initTeamScores();
    pushAllGameState();
-   queueStateUpdate("history_len", "0");
-   for (var hist_id = 0; hist_id < 10; hist_id++) {
-      queueStateUpdate("history_" + hist_id.toString(), "");
-      if (hist_id + 1 % 40 == 0) {
-         commitQueuedStateUpdates();
-      }
-   }
+   var histDiv = document.getElementById('historyDiv');
+   histDiv.innerHTML = ""; 
    commitQueuedStateUpdates();
 }
 

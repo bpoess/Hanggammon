@@ -132,31 +132,6 @@ function team1ScoreDec()
    decScore(1);
 }
 
-function updateDisplayState()
-{
-   gameStateToDisplay();
-   //var stateDiv = document.getElementById('stateDiv');
-   //stateDiv.innerHTML = gameStateToString();
-
-   var histDiv = document.getElementById('historyDiv');
-   histDiv.innerHTML = "";
-   var hist_len = parseInt(gapi.hangout.data.getValue("history_len"));
-   for (var i = hist_len - 1; i < hist_len - 1 + 10; i++) {
-      hist = gapi.hangout.data.getValue("history_" + (i % 10).toString());
-      if (hist != undefined) {
-          histDiv.innerHTML += hist;
-      }
-   }
-   
-   var dice1 = document.getElementById('dice1');
-   dice1.innerHTML = gapi.hangout.data.getValue("dice0_value");
-   //canvg('die1', '//hanggammon.appspot.com/img/die1.svg')
-
-   var dice2 = document.getElementById('dice2');
-   dice2.innerHTML = gapi.hangout.data.getValue("dice1_value");
-   //canvg('die2', '//hanggammon.appspot.com/img/die2.svg')
-}
-
 // Sync state update coming from the server
 function onStateChange(changeEvent)
 {
@@ -164,9 +139,12 @@ function onStateChange(changeEvent)
    for (var updatedKey in changeEvent.state) {
       gameState[updatedKey] = changeEvent.state[updatedKey];
    }
+}
 
-   // Call method to update display state
-   updateDisplayState();
+function onMessageReceived(senderId, message)
+{
+   var histDiv = document.getElementById('historyDiv');
+   histDiv.innerHTML += message;
 }
 
 function init() {
@@ -178,6 +156,8 @@ function init() {
       function(eventObj) {
          if (eventObj.isApiReady) {
             gapi.hangout.data.onStateChanged.add(onStateChange);
+
+            gapu.hangout.data.onMessageReceived.add(onMessageReceived);
 
             initGameState();
             updateDisplayState();
