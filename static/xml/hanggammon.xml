@@ -78,8 +78,8 @@
     <input class="button" type="button" value="Roll 'em" id="rollDiceButton" style="float:left" onClick="rollDiceTest()"/>
   </form>
   <div id="diceValues">
-    <span id="dice1"></span> 
-    <span id="dice2"></span> 
+    <img id="dice1" src="//hanggammon.appspot.com/img/die1.png">
+    <img id="dice2" src="//hanggammon.appspot.com/img/die2.png">
   </div>
 </div>
 <canvas id="board1" style="float:left"></canvas>
