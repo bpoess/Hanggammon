@@ -139,11 +139,28 @@ function onStateChange(changeEvent)
    for (var updatedKey in changeEvent.state) {
       gameState[updatedKey] = changeEvent.state[updatedKey];
    }
+   
+   updateDisplayState();
 }
 
 function onMessageReceived(senderId, message)
 {
   histdiv_add(message);
+}
+
+function updateDisplayState()
+{
+   gameStateToDisplay();
+   //var stateDiv = document.getElementById('stateDiv');
+   //stateDiv.innerHTML = gameStateToString();
+
+   var dice1 = document.getElementById('dice1');
+   dice1.innerHTML = gapi.hangout.data.getValue("dice0_value");
+   //canvg('die1', '//hanggammon.appspot.com/img/die1.svg')
+
+   var dice2 = document.getElementById('dice2');
+   dice2.innerHTML = gapi.hangout.data.getValue("dice1_value");
+   //canvg('die2', '//hanggammon.appspot.com/img/die2.svg')
 }
 
 function init() {
