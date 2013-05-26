@@ -66,6 +66,8 @@
        onClick="team0ScoreDec()" style="display:inline"/>
       <input class="button" type="button" value="Team1 -1" id="team1DecButton"
        onClick="team1ScoreDec()" style="display:inline"/>
+      <input class="button" type="button" value="Flip boards" id="flipBoardButton"
+       onClick="flipBoardClicked()" style="display:inline"/>
    </form>
 </p>
 
@@ -130,6 +132,11 @@ function team0ScoreDec()
 function team1ScoreDec()
 {
    decScore(1);
+}
+
+function flipBoardClicked()
+{
+   flipBoard();
 }
 
 // Sync state update coming from the server

@@ -20,6 +20,39 @@ var rightHalfMaxXCoord = rightHalfMinXCoord + (boardWidth / 2) - (boardMiddle / 
 var selectedBoard = -1;
 var selectedSlot = -1;
 
+// Whether the board is flipped or not
+var boardFlipped = false;
+
+// Transformation table for going from slots to their flipped equivalents
+var flippedSlots = [pieceState.IN_SLOT_12,  // IN_SLOT_0
+                    pieceState.IN_SLOT_13,  // IN_SLOT_1
+                    pieceState.IN_SLOT_14,  // IN_SLOT_2
+                    pieceState.IN_SLOT_15,  // IN_SLOT_3
+                    pieceState.IN_SLOT_16,  // IN_SLOT_4
+                    pieceState.IN_SLOT_17,  // IN_SLOT_5
+                    pieceState.IN_SLOT_18,  // IN_SLOT_6
+                    pieceState.IN_SLOT_19,  // IN_SLOT_7
+                    pieceState.IN_SLOT_20,  // IN_SLOT_8
+                    pieceState.IN_SLOT_21,  // IN_SLOT_9
+                    pieceState.IN_SLOT_22,  // IN_SLOT_10
+                    pieceState.IN_SLOT_23,  // IN_SLOT_11
+                    pieceState.IN_SLOT_0,   // IN_SLOT_12
+                    pieceState.IN_SLOT_1,   // IN_SLOT_13
+                    pieceState.IN_SLOT_2,   // IN_SLOT_14
+                    pieceState.IN_SLOT_3,   // IN_SLOT_15
+                    pieceState.IN_SLOT_4,   // IN_SLOT_16
+                    pieceState.IN_SLOT_5,   // IN_SLOT_17
+                    pieceState.IN_SLOT_6,   // IN_SLOT_18
+                    pieceState.IN_SLOT_7,   // IN_SLOT_19
+                    pieceState.IN_SLOT_8,   // IN_SLOT_20
+                    pieceState.IN_SLOT_9,   // IN_SLOT_21
+                    pieceState.IN_SLOT_10,  // IN_SLOT_22
+                    pieceState.IN_SLOT_11,  // IN_SLOT_23
+                    pieceState.HIT_1,       // HIT_0
+                    pieceState.HIT_0,       // HIT_1
+                    pieceState.PICKED_UP_1, // PICKED_UP_0
+                    pieceState.PICKED_UP_0] // PICKED_UP_1
+
 function initGraphicalBoardEventHandlers()
 {
   var board0 = document.getElementById('board0');
@@ -186,6 +219,18 @@ function gameStateToDisplay()
          context.strokeStyle = '#000000';
          context.lineWidth = 1;
 
+         // Flip the board if configured to do so
+         if (boardFlipped === true) {
+            /*
+             * Since rotation happens around origin (0,0) ie. top left corner,
+             * we need to translate the context to the bottom right corner of
+             * the canvas first, so the rotation will bring the context back
+             * into the canvas.
+             */
+            context.translate(boards[i].width, boards[i].height);
+            context.rotate(Math.PI);
+         }
+
          // Draw board borders
          context.strokeRect(leftHalfMinXCoord, 0, boardWidth, boardHeight);
 
@@ -303,6 +348,13 @@ function gameStateToDisplay()
    }
 }
 
+// Flip the board and draw it
+function flipBoard()
+{
+   boardFlipped = !boardFlipped;
+   gameStateToDisplay();
+}
+
 // Returns true if the game state change requires a redraw
 function handleSelectedSlot(boardId, newSlot)
 {
@@ -353,6 +405,10 @@ function mouseDownListenerZero(e)
 {
    var newSlot = getSlotFromCoordinates(e.offsetX, e.offsetY);
 
+   if (boardFlipped === true) {
+      newSlot = flippedSlots[newSlot];
+   }
+
    if (handleSelectedSlot(0, newSlot)) {
       gameStateToDisplay();
    }
@@ -361,6 +417,10 @@ function mouseDownListenerZero(e)
 function mouseDownListenerOne(e)
 {
    var newSlot = getSlotFromCoordinates(e.offsetX, e.offsetY);
+
+   if (boardFlipped === true) {
+      newSlot = flippedSlots[newSlot];
+   }
 
    if (handleSelectedSlot(1, newSlot)) {
       gameStateToDisplay();
