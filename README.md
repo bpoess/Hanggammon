@@ -1,4 +1,4 @@
 Hanggammon
 ==========
 
-Hangout Multiplayer Backgammon
+Google Hangout Multiplayer Backgammon
