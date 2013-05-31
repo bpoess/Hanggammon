@@ -93,7 +93,7 @@
     padding:5px;
     margin-top:5px;
     width:800px;
-    height:100px;
+    height:300px;
     overflow:scroll;
     }
 .auto{
@@ -102,7 +102,7 @@
     padding:5px;
     margin-top:5px;
     width:800px;
-    height:100px;
+    height:300px;
     overflow:auto;
     }
 </style>
