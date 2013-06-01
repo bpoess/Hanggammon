@@ -48,43 +48,59 @@
 <script src="https://hanggammon.appspot.com/js/score.js"></script>
 <script src="https://hanggammon.appspot.com/js/seedrandom.js"></script>
 
-<h3>HangGammon</h3>
+<span id="title" style="font-size:36px; font-weight:bold; margin:10px;">HangGammon</span>
 
-<p>
-    <input class="button" type="button" value="Reset Game" id="resetGameButton"
-        onClick="resetGameState()" style="display:inline"/>
-</p>
-
-
-<p>
-   <form name="scoreForm">
-      <input class="button" type="button" value="Team0 +1" id="team0IncButton"
-       onClick="team0ScoreInc()" style="display:inline"/>
-      <input class="button" type="button" value="Team1 +1" id="team1IncButton"
-       onClick="team1ScoreInc()" style="display:inline"/>
-      <input class="button" type="button" value="Team0 -1" id="team0DecButton"
-       onClick="team0ScoreDec()" style="display:inline"/>
-      <input class="button" type="button" value="Team1 -1" id="team1DecButton"
-       onClick="team1ScoreDec()" style="display:inline"/>
-      <input class="button" type="button" value="Flip boards" id="flipBoardButton"
-       onClick="flipBoardClicked()" style="display:inline"/>
-   </form>
-</p>
+<input class="button" type="button" value="Reset Game" id="resetGameButton" onClick="resetGameState()" style="display:inline"/>
+<input class="button" type="button" value="Team0 +1" id="team0IncButton" onClick="team0ScoreInc()" style="display:inline"/>
+<input class="button" type="button" value="Team1 +1" id="team1IncButton" onClick="team1ScoreInc()" style="display:inline"/>
+<input class="button" type="button" value="Team0 -1" id="team0DecButton" onClick="team0ScoreDec()" style="display:inline"/>
+<input class="button" type="button" value="Team1 -1" id="team1DecButton" onClick="team1ScoreDec()" style="display:inline"/>
+<input class="button" type="button" value="Flip boards" id="flipBoardButton" onClick="flipBoardClicked()" style="display:inline"/>
 
 <div id="stateDiv"></div>
 <div id="started"></div>
 
-<canvas id="board0" style="float:left"></canvas>
-<div id="diceContainer" style="float:left">
-  <form name="rollForm">
-    <input class="button" type="button" value="Roll 'em" id="rollDiceButton" style="float:left" onClick="rollDiceTest()"/>
-  </form>
-  <div id="diceValues">
-    <img id="dice1" src="//hanggammon.appspot.com/img/die1.png">
-    <img id="dice2" src="//hanggammon.appspot.com/img/die2.png">
-  </div>
-</div>
-<canvas id="board1" style="float:left"></canvas>
+<div id="horizontalSeparator" style="width:100%; height:1px; background-color:black; margin-top:10px; margin-bottom:10px;"></div>
+
+<table style="width:100%">
+  <tr style="width:100%">
+    <td style="vertical-align:middle; text-align:center;">
+      <form name="board0top" style="margin:10px">
+        <input class="button" type="button" value="Take Seat" id="board0TopSeatButton"
+         onclick="board0TakeTopSeat()" style="display:inline"/>
+      </form>
+      <div id="board0TopSeatName" style="margin:10px">Board0TopSeat</div>
+      <canvas id="board0" style="border-width:1px; border-color:purple; border-style:solid;"></canvas>
+      <div id="board0BottomSeatName" style="margin: 10px">Board0BottomSeat</div>
+      <form name="board0bottom" style="margin:10px">
+        <input class="button" type="button" value="Take Seat" id="board0BottomSeatButton"
+         onclick="board0TakeBottomSeat()"/>
+      </form>
+    </td>
+    <td style="width:172px; vertical-align:middle; text-align:center;">
+      <form name="rollForm">
+        <input class="button" type="button" value="Roll 'em" id="rollDiceButton" onClick="rollDiceTest()"/>
+      </form>
+      <div id="diceValues">
+        <img id="dice1" src="//hanggammon.appspot.com/img/die1.png">
+        <img id="dice2" src="//hanggammon.appspot.com/img/die2.png">
+      </div>
+    </td>
+    <td style="vertical-align:middle; text-align:center;">
+      <form name="board1top" style="margin:10px">
+        <input class="button" type="button" value="Take Seat" id="board1TopSeatButton"
+         onclick="board1TakeTopSeat()" style="display:inline"/>
+      </form>
+      <div id="board1TopSeatName" style="margin:10px">Board1TopSeat</div>
+      <canvas id="board1" style="border-width:1px; border-color:purple; border-style:solid;"></canvas>
+      <div id="board1BottomSeatName" style="margin: 10px">Board1BottomSeat</div>
+      <form name="board1bottom" style="margin:10px">
+        <input class="button" type="button" value="Take Seat" id="board1BottomSeatButton"
+         onclick="board1TakeBottomSeat()"/>
+      </form>
+    </td>
+  </tr>
+</table>
 
 <style type="text/css">
 .scroll{
@@ -107,6 +123,7 @@
     }
 </style>
 <div class="scroll" id="historyDiv"></div>
+
 <script>
 
 function rollDiceTest()
@@ -195,6 +212,8 @@ function init() {
 gadgets.util.registerOnLoadHandler(init);
 </script>
 </body>
+</html>
+
 ]]>
 </Content>
 </Module>
