@@ -1,8 +1,13 @@
 function histdiv_add(msg)
 {
-   var histDiv = document.getElementById('historyDiv');
-   msg += histDiv.innerHTML;
-   histDiv.innerHTML = msg;
+   var histDiv0 = document.getElementById('historyDiv0');
+   var histDiv1 = document.getElementById('historyDiv1');
+
+   // prepend msg; just use histDiv0 for now until history is properly split
+   msg += histDiv0.innerHTML;
+
+   // both history boxes the same until history is properly split
+   histDiv1.innerHTML = histDiv0.innerHTML = msg;
 }
 
 

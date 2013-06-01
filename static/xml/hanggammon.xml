@@ -35,6 +35,22 @@
     background: -moz-linear-gradient(bottom, #ddd, #aaa); }
 
 -->
+
+body {
+  margin: 0px;
+  padding: 10px;
+}
+
+table {
+  margin: 0px;
+  padding: 0px;
+}
+
+.scroll{
+  border: 1px solid black;
+  height:150px;
+  overflow:scroll;
+}
 </style>
 <body>
 
@@ -76,6 +92,7 @@
         <input class="button" type="button" value="Take Seat" id="board0BottomSeatButton"
          onclick="board0TakeBottomSeat()"/>
       </form>
+      <div class="scroll" id="historyDiv0"></div>
     </td>
     <td style="width:172px; vertical-align:middle; text-align:center;">
       <form name="rollForm">
@@ -98,31 +115,10 @@
         <input class="button" type="button" value="Take Seat" id="board1BottomSeatButton"
          onclick="board1TakeBottomSeat()"/>
       </form>
+      <div class="scroll" id="historyDiv1"></div>
     </td>
   </tr>
 </table>
-
-<style type="text/css">
-.scroll{
-    display:block;
-    border: 1px solid red;
-    padding:5px;
-    margin-top:5px;
-    width:800px;
-    height:300px;
-    overflow:scroll;
-    }
-.auto{
-    display:block;
-    border: 1px solid red;
-    padding:5px;
-    margin-top:5px;
-    width:800px;
-    height:300px;
-    overflow:auto;
-    }
-</style>
-<div class="scroll" id="historyDiv"></div>
 
 <script>
 
@@ -213,7 +209,6 @@ gadgets.util.registerOnLoadHandler(init);
 </script>
 </body>
 </html>
-
 ]]>
 </Content>
 </Module>

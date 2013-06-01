@@ -195,8 +195,9 @@ function resetGameState()
    initDiceState();
    initTeamScores();
    pushAllGameState();
-   var histDiv = document.getElementById('historyDiv');
-   histDiv.innerHTML = ""; 
+   var histDiv0 = document.getElementById('historyDiv0');
+   var histDiv1 = document.getElementById('historyDiv1');
+   histDiv0.innerHTML = histDiv1.innerHTML = ""; 
    commitQueuedStateUpdates();
 }
 
