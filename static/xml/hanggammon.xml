@@ -48,8 +48,9 @@ table {
 
 .scroll{
   border: 1px solid black;
-  height:150px;
-  overflow:scroll;
+  height: 150px;
+  overflow: scroll;
+  text-align: left;
 }
 </style>
 <body>
