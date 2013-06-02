@@ -93,7 +93,6 @@ table {
         <input class="button" type="button" value="Take Seat" id="board0BottomSeatButton"
          onclick="board0TakeBottomSeat()"/>
       </form>
-      <div class="scroll" id="historyDiv0"></div>
     </td>
     <td style="width:172px; vertical-align:middle; text-align:center;">
       <form name="rollForm">
@@ -116,6 +115,15 @@ table {
         <input class="button" type="button" value="Take Seat" id="board1BottomSeatButton"
          onclick="board1TakeBottomSeat()"/>
       </form>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <div class="scroll" id="historyDiv0"></div>
+    </td>
+    <td>
+    </td>
+    <td>
       <div class="scroll" id="historyDiv1"></div>
     </td>
   </tr>
