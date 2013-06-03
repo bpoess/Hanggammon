@@ -179,7 +179,7 @@ function onMessageReceived(messageReceivedEvent)
 
 function updateDisplayState()
 {
-   gameStateToDisplay();
+   boardStateToDisplay();
    //var stateDiv = document.getElementById('stateDiv');
    //stateDiv.innerHTML = gameStateToString();
 

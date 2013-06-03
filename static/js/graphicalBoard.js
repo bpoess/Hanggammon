@@ -202,7 +202,7 @@ function drawTriangle(context, baseX, baseY, upwards)
    context.closePath();
 }
 
-function gameStateToDisplay()
+function boardStateToDisplay()
 {
    var boards = new Array();
    boards[0] = document.getElementById('board0');
@@ -352,7 +352,7 @@ function gameStateToDisplay()
 function flipBoard()
 {
    boardFlipped = !boardFlipped;
-   gameStateToDisplay();
+   boardStateToDisplay();
 }
 
 // Returns true if the game state change requires a redraw
@@ -410,7 +410,7 @@ function mouseDownListenerZero(e)
    }
 
    if (handleSelectedSlot(0, newSlot)) {
-      gameStateToDisplay();
+      boardStateToDisplay();
    }
 }
 
@@ -423,6 +423,6 @@ function mouseDownListenerOne(e)
    }
 
    if (handleSelectedSlot(1, newSlot)) {
-      gameStateToDisplay();
+      boardStateToDisplay();
    }
 }
