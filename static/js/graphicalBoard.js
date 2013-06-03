@@ -348,11 +348,10 @@ function boardStateToDisplay()
    }
 }
 
-// Flip the board and draw it
+// Flip the board
 function flipBoard()
 {
    boardFlipped = !boardFlipped;
-   boardStateToDisplay();
 }
 
 // Returns true if the game state change requires a redraw
