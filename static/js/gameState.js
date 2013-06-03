@@ -4,7 +4,7 @@ var gameState = [];
 // Board definitions
 var numPiecesPerBoard = 15;
 var numBoards = 2;
-var numPlayers = 4;
+var numPlayersPerTeam = 2;
 var numDice = 2;
 
 // Team definitions
@@ -112,16 +112,18 @@ function movePiecesToStandardLocations(boardId)
 }
 
 // Return state key for player name
-function getPlayerNameKey(playerId)
+function getPlayerNameKey(teamId, playerId)
 {
-   return 'player' + playerId + '_name';
+   return 'team' + teamId + '_player' + playerId;
 }
 
 // Clear player state
 function clearPlayers()
 {
-   for (var i = 0; i < numPlayers; i++) {
-      gameState[getPlayerNameKey(i)] = 'Player ' + (i + 1);
+   for (var i = 0; i < numTeams; i++) {
+      for (var j = 0; j < numPlayers; j++) {
+         gameState[getPlayerNameKey(i, j)] = '';
+      }
    }
 }
 
@@ -228,9 +230,11 @@ function gameStateToString()
       }
    }
 
-   for (var i = 0; i < numPlayers; i++) {
-      returnStr += getPlayerNameKey(i) + ' = "' +
-                   gameState[getPlayerNameKey(i)] + '"\n';
+   for (var i = 0; i < numTeams; i++) {
+      for (var j = 0; j < numPlayers; j++) {
+         returnStr += getPlayerNameKey(i,j) + ' = "' +
+                      gameState[getPlayerNameKey(i, j)] + '"\n';
+      }
    }
 
    for (var i = 0; i < numDice; i++) {
