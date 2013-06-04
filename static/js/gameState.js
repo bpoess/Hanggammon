@@ -121,8 +121,8 @@ function getPlayerNameKey(teamId, playerId)
 function clearPlayers()
 {
    for (var i = 0; i < numTeams; i++) {
-      for (var j = 0; j < numPlayers; j++) {
-         gameState[getPlayerNameKey(i, j)] = '';
+      for (var j = 0; j < numPlayersPerTeam; j++) {
+         gameState[getPlayerNameKey(i, j)] = 'Empty';
       }
    }
 }
