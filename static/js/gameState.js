@@ -157,8 +157,10 @@ function initTeamScores()
 function pushAllGameState()
 {
    for (var key in gameState) {
-      gapi.hangout.data.setValue(key, gameState[key]);
+      queueStateUpdate(key, gameState[key]);
    }
+
+   commitQueuedStateUpdates();
 }
 
 // Pull all game state from the server
@@ -200,7 +202,6 @@ function resetGameState()
    var histDiv0 = document.getElementById('historyDiv0');
    var histDiv1 = document.getElementById('historyDiv1');
    histDiv0.innerHTML = histDiv1.innerHTML = ""; 
-   commitQueuedStateUpdates();
 }
 
 // Initialize the game state to default values

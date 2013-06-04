@@ -204,12 +204,12 @@ function init() {
    gapi.hangout.onApiReady.add(
       function(eventObj) {
          if (eventObj.isApiReady) {
+            initGameState();
+            updateDisplayState();
+
             gapi.hangout.data.onStateChanged.add(onStateChange);
 
             gapi.hangout.data.onMessageReceived.add(onMessageReceived);
-
-            initGameState();
-            updateDisplayState();
          }
       }
    );
