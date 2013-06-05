@@ -19,5 +19,7 @@ function rollDice() {
    // send state update to the server
    commitQueuedStateUpdates();
 
-   history_add("rolled " + diceOne.toString() + " " + diceTwo.toString());
+   // add to both boards' history
+   history_add("0", "rolled " + diceOne.toString() + " " + diceTwo.toString());
+   history_add("1", "rolled " + diceOne.toString() + " " + diceTwo.toString());
 }

@@ -1,17 +1,15 @@
-function histdiv_add(msg)
+function histdiv_add(board, msg)
 {
-   var histDiv0 = document.getElementById('historyDiv0');
-   var histDiv1 = document.getElementById('historyDiv1');
+   var histDiv = document.getElementById('historyDiv' + board);
 
-   // prepend msg; just use histDiv0 for now until history is properly split
-   msg += histDiv0.innerHTML;
+   // prepend msg
+   msg += histDiv.innerHTML;
 
-   // both history boxes the same until history is properly split
-   histDiv1.innerHTML = histDiv0.innerHTML = msg;
+   histDiv.innerHTML = msg;
 }
 
 
-function history_add(msg)
+function history_add(board, msg)
 {
    // first part of history is the timestamp
    var currentdate = new Date();
@@ -40,7 +38,7 @@ function history_add(msg)
    // finally the actual message
    hist += " " + msg + "<br>";
 
-   histdiv_add(hist);
+   histdiv_add(board, hist);
 
-   gapi.hangout.data.sendMessage(hist);
+   gapi.hangout.data.sendMessage(board + hist);
 }

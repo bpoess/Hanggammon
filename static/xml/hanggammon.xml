@@ -176,7 +176,9 @@ function onStateChange(changeEvent)
 
 function onMessageReceived(messageReceivedEvent)
 {
-  histdiv_add(messageReceivedEvent.message);
+  var board = messageReceivedEvent.message.substring(0, 1)
+  var message = messageReceivedEvent.message.substring(1)
+  histdiv_add(board, message);
 }
 
 function updateDisplayState()
